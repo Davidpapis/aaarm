@@ -15,8 +15,8 @@
   <!-- FontAwesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=1.0.6">
+  <!-- CSS Stylesheet (Direct mode for Vite dev & static compatibility) -->
+  <link rel="stylesheet" href="/styles.css?v=2.7.8">
 </head>
 <body>
 
@@ -49,7 +49,7 @@
         <a href="tel:+34618848494"><i class="fa-solid fa-mobile-screen-button"></i> 618 848 494</a>
       </div>
       <div class="top-bar-right">
-        <span><i class="fa-solid fa-ribbon"></i> Entidad de Utilidad Pública (Ministerio del Interior)</span>
+        <span><i class="fa-solid fa-ribbon"></i> Entidad de Utilidad Pública</span>
       </div>
     </div>
   </div>
@@ -59,11 +59,11 @@
     <div class="header-container">
       <div class="logo-area">
         <a href="#inicio" class="logo-link">
-          <div class="logo-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
-          <div class="logo-text">
-            <span class="logo-title">AUTISMO</span>
-            <span class="logo-subtitle">Ángel Rivière</span>
-          </div>
+          <img
+            src="recursos/logo transparente.png"
+            class="site-logo-image"
+            alt="Asociación Autismo Ángel Rivière"
+          >
         </a>
       </div>
       
@@ -81,7 +81,7 @@
             </ul>
           </li>
           <li><a href="#servicios" class="nav-link">Servicios</a></li>
-          <li><a href="#proyecto-elviria" class="nav-link highlight-menu">Elviria</a></li>
+          <li><a href="#proyecto-elviria" class="nav-link">Proyectos</a></li>
           <li><a href="#utilidad-publica" class="nav-link">Deducción</a></li>
           <li><a href="#actualidad" class="nav-link">Actualidad</a></li>
           <li><a href="#colabora" class="nav-link">Colabora</a></li>
@@ -109,7 +109,7 @@
       <li><a href="#inicio" class="mobile-nav-link">Inicio</a></li>
       <li><a href="#sobre-nosotros" class="mobile-nav-link">Sobre Nosotros</a></li>
       <li><a href="#servicios" class="mobile-nav-link">Servicios</a></li>
-      <li><a href="#proyecto-elviria" class="mobile-nav-link">Proyecto Elviria</a></li>
+      <li><a href="#proyecto-elviria" class="mobile-nav-link">Proyectos</a></li>
       <li><a href="#utilidad-publica" class="mobile-nav-link">Deducción Fiscal</a></li>
       <li><a href="#actualidad" class="mobile-nav-link">Actualidad</a></li>
       <li><a href="#colabora" class="mobile-nav-link">Colabora</a></li>
@@ -123,56 +123,752 @@
     <!-- PAGE: INICIO (HOMEPAGE) -->
     <section class="page-view active" id="inicio">
       
-      <!-- Spectacular Immersive Hero Section -->
-      <div class="hero-section hero-spectacular">
-        <!-- Floating Animated Glow Blobs (Creative Spectrum Visual) -->
-        <div class="glow-blob blob-amber"></div>
-        <div class="glow-blob blob-coral"></div>
-        <div class="glow-blob blob-blue"></div>
+      <!-- =================================================================
+           HERO SLIDER LUMÍNICO DE ESTUDIO (3 FOTOGRAFÍAS A PANTALLA COMPLETA)
+           - Fotografías de estudio luminosas, cálidas y bien iluminadas.
+           - Textos limpios y elegantes, en tarjeta de cristal sobre fondo claro.
+           - Control por flechas, pestañas interactivas y auto-play.
+           ================================================================= -->
+      <style id="hero-slider-styles">
+        /* Full-Bleed Photo Hero with Editorial Text Overlay */
+        .hero-slider-section {
+          position: relative;
+          width: 100%;
+          /* Full visible viewport: the main navigation overlaps the photo, so
+             only the real top information bar is deducted. */
+          height: calc(100vh - var(--hero-topbar-height, 0px));
+          height: calc(100svh - var(--hero-topbar-height, 0px));
+          height: calc(100dvh - var(--hero-topbar-height, 0px));
+          min-height: calc(100vh - var(--hero-topbar-height, 0px));
+          min-height: calc(100svh - var(--hero-topbar-height, 0px));
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        }
 
-        <div class="container hero-container">
-          <div class="hero-text-content">
-            <span class="eyebrow"><i class="fa-solid fa-sun pulse-icon"></i> Creciendo Juntos desde 2002</span>
-            <h1 class="text-gradient">Entender el autismo hoy para construir el mañana</h1>
-            <p>Brindamos apoyo especializado, diagnóstico clínico y terapias de desarrollo para personas con autismo y sus familias en la Costa del Sol. Acompañamos vidas, inspiramos futuros.</p>
-            <div class="hero-actions">
-              <a href="#servicios" class="btn btn-secondary btn-large">Nuestros Servicios <i class="fa-solid fa-puzzle-piece"></i></a>
-              <a href="#proyecto-elviria" class="btn btn-coral btn-large">Proyecto Elviria <i class="fa-solid fa-building-columns"></i></a>
-            </div>
-            
-            <!-- Quick impact trust bar -->
-            <div class="hero-trust-bar">
-              <div class="trust-item"><i class="fa-solid fa-shield-check"></i> <span>Utilidad Pública</span></div>
-              <div class="trust-item"><i class="fa-solid fa-user-doctor"></i> <span>Equipo Colegiado</span></div>
-              <div class="trust-item"><i class="fa-solid fa-calendar-check"></i> <span>24 Años de Labor</span></div>
-            </div>
-          </div>
-          
-          <div class="hero-media-content">
-            <!-- Interavtive glass card showing rendering and play trigger to video -->
-            <div class="hero-featured-card hover-lift" id="trigger-video-modal" role="button" aria-label="Abrir reproductor de vídeo institucional">
-              <img src="assets/images/elviria_render.png" alt="Concepto 3D de la futura Residencia y Centro de Día Elviria Sur">
-              <div class="card-glass-overlay">
-                <span class="card-tag"><i class="fa-solid fa-location-dot"></i> Marbella • 6.650 m²</span>
-                <h3>Centro de Día y Residencia</h3>
-                <p>Haz clic para reproducir el vídeo institucional</p>
-                <div class="hero-play-trigger">
-                  <div class="play-pulse-ring"></div>
-                  <i class="fa-solid fa-play"></i>
+        /* Photo fills the entire hero, edge to edge */
+        .hero-photo-stage {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          overflow: hidden;
+        }
+
+        /* Readability filter: darkens the area behind the text, fades out toward the rest of the photo.
+           Spans the full bleed (edge to edge, same as the photo, and top to bottom) so no strip at the
+           far left or right at the very top stays undarkened. */
+        .hero-photo-overlay {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          pointer-events: none;
+          background: linear-gradient(100deg,
+            rgba(6, 12, 26, 0.88) 0%,
+            rgba(6, 12, 26, 0.72) 30%,
+            rgba(6, 12, 26, 0.32) 52%,
+            rgba(6, 12, 26, 0) 68%
+          );
+        }
+
+        /* Magazine Text Overlay */
+        .hero-magazine-container {
+          position: relative;
+          width: min(100%, 1440px);
+          height: 100%;
+          flex: 1;
+          display: flex;
+          align-items: center;
+          margin: 0 auto;
+          padding: clamp(108px, 14vh, 150px) clamp(48px, 12vw, 190px) clamp(128px, 17vh, 174px);
+          z-index: 10;
+        }
+
+        .hero-editorial-column {
+          width: min(100%, 760px);
+          transform: translateY(clamp(-56px, -6vh, -34px));
+        }
+
+        .hero-editorial-stories {
+          display: grid;
+        }
+
+        .hero-slide-content {
+          position: relative;
+          inset: auto;
+          grid-area: 1 / 1;
+          align-self: center;
+          max-width: 760px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translate3d(0, 26px, 0);
+          filter: blur(4px);
+          pointer-events: none;
+          transition:
+            opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.9s ease,
+            visibility 0s linear 0.9s;
+        }
+
+        .hero-slide-content.active {
+          opacity: 1;
+          visibility: visible;
+          transform: translate3d(0, 0, 0);
+          filter: blur(0);
+          pointer-events: auto;
+          transition-delay: 0.18s, 0.18s, 0.18s, 0s;
+        }
+
+        /* Context label: a compact glass badge that stays legible on every photo */
+        .magazine-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          width: fit-content;
+          margin-bottom: 18px;
+          padding: 8px 14px;
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          border-radius: 999px;
+          background: rgba(8, 18, 35, 0.68);
+          color: #ffffff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          line-height: 1.2;
+          letter-spacing: 0.045em;
+          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 8px 24px rgba(3, 10, 24, 0.2);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+        }
+
+        .magazine-badge i {
+          color: #ffffff;
+          font-size: 0.76rem;
+        }
+
+        .magazine-badge.badge-blue {
+          background: var(--brand-blue);
+        }
+
+        .magazine-badge.badge-coral {
+          background: var(--brand-red);
+        }
+
+        .magazine-badge.badge-green {
+          background: var(--brand-green);
+        }
+
+        /* High-End Editorial Typography (white over the photo filter) */
+        .hero-magazine-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+          font-weight: 800;
+          line-height: 1.22;
+          color: #ffffff;
+          text-transform: uppercase;
+          letter-spacing: -0.02em;
+          margin-bottom: 22px;
+          text-shadow: 0 3px 20px rgba(0, 0, 0, 0.35);
+        }
+        .highlight-blue {
+          color: var(--brand-blue);
+        }
+        .highlight-coral {
+          color: var(--brand-red);
+        }
+        .highlight-green {
+          color: var(--brand-green);
+        }
+
+        .hero-magazine-lead {
+          font-size: 1.05rem;
+          line-height: 1.65;
+          color: rgba(226, 232, 240, 0.92);
+          margin-bottom: 24px;
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Editorial Buttons */
+        .hero-magazine-actions {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-bottom: 24px;
+        }
+        .magazine-btn-primary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 13px 26px;
+          background: #ffffff;
+          color: #0f172a;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 700;
+          border-radius: 10px;
+          text-decoration: none;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+          transition: all 0.25s ease;
+          border: none;
+          cursor: pointer;
+        }
+        .magazine-btn-primary:hover {
+          background: #f1f5f9;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
+          color: #0f172a;
+        }
+
+        .magazine-btn-coral {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 13px 26px;
+          background: var(--brand-red);
+          color: #ffffff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 700;
+          border-radius: 10px;
+          text-decoration: none;
+          box-shadow: 0 4px 16px rgb(var(--brand-red-rgb) / 0.32);
+          transition: all 0.25s ease;
+          border: none;
+          cursor: pointer;
+        }
+        .magazine-btn-coral:hover {
+          background: var(--brand-red);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgb(var(--brand-red-rgb) / 0.46);
+          color: #ffffff;
+        }
+
+        .magazine-btn-secondary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 24px;
+          background: rgba(255, 255, 255, 0.12);
+          color: #ffffff;
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 600;
+          border-radius: 10px;
+          border: 1.5px solid rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          text-decoration: none;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          transition: all 0.25s ease;
+          cursor: pointer;
+        }
+        .magazine-btn-secondary:hover {
+          background: rgba(255, 255, 255, 0.24);
+          border-color: #ffffff;
+          transform: translateY(-2px);
+          color: #ffffff;
+        }
+
+        /* Editorial Footnote Checklist */
+        .magazine-footnote-list {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex-wrap: wrap;
+          padding-top: 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .magazine-footnote-item {
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: rgba(226, 232, 240, 0.85);
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .magazine-footnote-item i {
+          color: var(--brand-green);
+          font-size: 0.75rem;
+        }
+
+        /* Photo Slides (100% Studio Natural Light - filter above handles legibility) */
+        .hero-bg-slide {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position: center center;
+          background-repeat: no-repeat;
+          opacity: 0;
+          visibility: visible;
+          transform: scale(1.035);
+          transition: opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1), transform 6.5s cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: opacity, transform;
+          z-index: 1;
+        }
+        .hero-bg-slide.active {
+          opacity: 1;
+          visibility: visible;
+          transform: scale(1);
+          z-index: 2;
+        }
+
+        /* Bottom Magazine Bar — positioned absolutely so it sits on the photo edge-to-edge */
+        .hero-bottom-magazine-bar {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 0 40px 22px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          z-index: 20;
+          /* subtle bottom gradient so tabs are legible over any photo */
+          background: linear-gradient(to top, rgba(6,12,26,0.55) 0%, transparent 100%);
+        }
+
+        .hero-bottom-magazine-bar .hero-scroll-down-hint {
+          position: absolute;
+          left: 50%;
+          bottom: 22px;
+          transform: translateX(-50%);
+        }
+
+        .hero-tabs-bar {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(255,255,255,0.12);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.25);
+          border-radius: 35px;
+          padding: 5px 8px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .hero-tab-btn {
+          background: none;
+          border: none;
+          color: rgba(255,255,255,0.75);
+          font-family: 'Outfit', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          padding: 7px 16px;
+          border-radius: 25px;
+          transition: all 0.2s ease;
+        }
+        .hero-tab-btn:hover {
+          color: #ffffff;
+          background: rgba(255,255,255,0.15);
+        }
+        .hero-tab-btn.active {
+          background: #ffffff;
+          color: #0f172a;
+          font-weight: 700;
+          box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+        }
+        .hero-tab-btn .tab-index {
+          font-size: 0.72rem;
+          opacity: 0.75;
+        }
+        .tab-sep {
+          width: 1px;
+          height: 14px;
+          background: rgba(255,255,255,0.25);
+        }
+
+        .hero-scroll-down-hint {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: rgba(255,255,255,0.85);
+          font-size: 0.78rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          text-decoration: none;
+          background: rgba(255,255,255,0.12);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          padding: 8px 18px;
+          border-radius: 30px;
+          border: 1px solid rgba(255,255,255,0.25);
+          box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+          transition: all 0.2s ease;
+        }
+        .hero-scroll-down-hint:hover {
+          color: #ffffff;
+          background: rgba(255,255,255,0.2);
+          transform: translate(-50%, 2px);
+        }
+
+        @media (max-width: 1280px) {
+          .hero-bottom-magazine-bar .hero-scroll-down-hint {
+            bottom: 78px;
+          }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+          .hero-photo-overlay {
+            background: linear-gradient(180deg,
+              rgba(6, 12, 26, 0.75) 0%,
+              rgba(6, 12, 26, 0.3) 36%,
+              rgba(6, 12, 26, 0.3) 64%,
+              rgba(6, 12, 26, 0.78) 100%
+            );
+          }
+          .hero-magazine-container {
+            padding: 110px clamp(42px, 9vw, 92px) 150px;
+          }
+          .hero-bottom-magazine-bar {
+            padding: 0 20px 20px;
+          }
+          .hero-bottom-magazine-bar .hero-scroll-down-hint {
+            bottom: 78px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .hero-magazine-title {
+            font-size: 1.85rem;
+          }
+          .hero-magazine-container {
+            align-items: center;
+            padding: 108px 24px 170px;
+          }
+          .hero-editorial-column {
+            transform: translateY(-12px);
+          }
+          .hero-tabs-bar {
+            width: 100%;
+            justify-content: center;
+          }
+          .hero-tab-btn {
+            padding: 6px 10px;
+            font-size: 0.78rem;
+          }
+          .hero-scroll-down-hint span {
+            display: inline;
+          }
+          .magazine-footnote-list {
+            display: none;
+          }
+          .hero-magazine-lead {
+            font-size: 0.98rem;
+            line-height: 1.55;
+            margin-bottom: 20px;
+          }
+          .magazine-badge {
+            margin-bottom: 14px;
+            padding: 7px 12px;
+            font-size: 0.7rem;
+          }
+          .hero-bottom-magazine-bar .hero-scroll-down-hint {
+            bottom: 82px;
+            white-space: nowrap;
+          }
+        }
+      </style>
+
+      <section class="hero-slider-section" id="hero-slider-section">
+
+        <!-- Full-Bleed Studio Photography Background -->
+        <div class="hero-photo-stage">
+          <div class="hero-bg-slide active" id="hero-bg-0" style="background-image: url('assets/images/hero-original-enhanced/hero-recepcion-mejorada.png');"></div>
+          <div class="hero-bg-slide" id="hero-bg-1" style="background-image: url('assets/images/hero-original-enhanced/hero-sala-familiar-mejorada.png');"></div>
+          <div class="hero-bg-slide" id="hero-bg-2" style="background-image: url('assets/images/hero-original-enhanced/hero-sala-terapia-mejorada.png');"></div>
+        </div>
+
+        <!-- Readability filter over the photo, strongest right behind the text -->
+        <div class="hero-photo-overlay" aria-hidden="true"></div>
+
+        <!-- Magazine Editorial Text, overlaid on the photo -->
+        <div class="hero-magazine-container">
+
+          <div class="hero-editorial-column">
+
+            <!-- Slide Editorial Stories -->
+            <div class="hero-editorial-stories">
+              
+              <!-- Story 0: El Autismo -->
+              <div class="hero-slide-content active" id="hero-slide-0">
+                <span class="magazine-badge badge-blue"><i class="fa-solid fa-compass"></i> Sede Central Río Real • Marbella</span>
+                <h1 class="hero-magazine-title">
+                  Entender el autismo hoy,<br>
+                  <span class="highlight-blue">construir su mañana</span>
+                </h1>
+                <p class="hero-magazine-lead">
+                  Acompañamos a más de 80 familias de Marbella y la Costa del Sol con rigor clínico, terapias individualizadas y cercanía humana en cada etapa del desarrollo.
+                </p>
+                <div class="hero-magazine-actions">
+                  <a href="#servicios" class="magazine-btn-primary"><i class="fa-solid fa-stethoscope"></i> Nuestras Terapias</a>
+                  <a href="#sobre-nosotros" class="magazine-btn-secondary">Conoce AAAR <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="magazine-footnote-list">
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> +80 Familias atendidas</span>
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> Equipo clínico multidisciplinar</span>
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> Marbella</span>
                 </div>
               </div>
+
+              <!-- Story 1: Proyecto Elviria -->
+              <div class="hero-slide-content" id="hero-slide-1">
+                <span class="magazine-badge badge-coral"><i class="fa-solid fa-landmark"></i> Proyecto Elviria • Marbella</span>
+                <h2 class="hero-magazine-title">
+                  Garantizar su dignidad<br>
+                  <span class="highlight-coral">en la edad adulta</span>
+                </h2>
+                <p class="hero-magazine-lead">
+                  Impulsamos el primer Centro de Día, Residencia y Viviendas Tuteladas en una parcela municipal de 6.650 m² para asegurar el futuro de las personas con TEA cuando sus familias falten.
+                </p>
+                <div class="hero-magazine-actions">
+                  <a href="#proyecto-elviria" class="magazine-btn-coral"><i class="fa-solid fa-compass-drafting"></i> Proyecto Elviria</a>
+                  <button class="magazine-btn-secondary" id="trigger-video-hero-modal"><i class="fa-solid fa-play"></i> Ver Vídeo</button>
+                </div>
+                <div class="magazine-footnote-list">
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> Parcela 6.650 m²</span>
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> Centro de Día & Residencia</span>
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> Modelo pionero</span>
+                </div>
+              </div>
+
+              <!-- Story 2: Donaciones & Utilidad Pública -->
+              <div class="hero-slide-content" id="hero-slide-2">
+                <span class="magazine-badge badge-green"><i class="fa-solid fa-certificate"></i> Declarada de Utilidad Pública</span>
+                <h2 class="hero-magazine-title">
+                  Tu colaboración<br>
+                  <span class="highlight-green">multiplica oportunidades</span>
+                </h2>
+                <p class="hero-magazine-lead">
+                  Desgrava hasta el 80% de tu donación en el IRPF según la Ley 49/2002. Cada aportación se transforma directamente en sesiones de terapia especializada y becas para familias.
+                </p>
+                <div class="hero-magazine-actions">
+                  <a href="#colabora" class="magazine-btn-coral"><i class="fa-solid fa-heart"></i> Donar (80% Deducción)</a>
+                  <a href="#utilidad-publica" class="magazine-btn-secondary"><i class="fa-solid fa-calculator"></i> Calculadora Fiscal</a>
+                </div>
+                <div class="magazine-footnote-list">
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> 80% Desgravación IRPF</span>
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> 100% Transparencia</span>
+                  <span class="magazine-footnote-item"><i class="fa-solid fa-check"></i> Certificado al instante</span>
+                </div>
+              </div>
+
             </div>
+
           </div>
+
         </div>
 
-        <!-- SVG Curve separator at the bottom -->
-        <div class="hero-wave-divider">
-          <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,8.75,57.05,18.3,88.43,26.85,152.42,44.29,223.36,68.7,321.39,56.44Z" class="shape-fill"></path>
-          </svg>
+        <!-- Bottom Magazine Folio Bar -->
+        <div class="hero-bottom-magazine-bar">
+          <div class="hero-tabs-bar">
+            <button class="hero-tab-btn active" data-slide-target="0">
+              <span class="tab-index">01</span>
+              <span class="tab-label">El Autismo</span>
+            </button>
+            <div class="tab-sep"></div>
+            <button class="hero-tab-btn" data-slide-target="1">
+              <span class="tab-index">02</span>
+              <span class="tab-label">Proyecto Elviria</span>
+            </button>
+            <div class="tab-sep"></div>
+            <button class="hero-tab-btn" data-slide-target="2">
+              <span class="tab-index">03</span>
+              <span class="tab-label">Donaciones</span>
+            </button>
+          </div>
+          
+          <a href="#inicio-contenido" class="hero-scroll-down-hint" id="hero-scroll-hint" aria-label="Desplazar hacia abajo">
+            <span>Explorar Asociación</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </a>
         </div>
-      </div>
 
+      </section>
+
+      <!-- Direct Hero Slider Script Controller -->
+      <!-- Hero header-height measurement (runs immediately, before paint) -->
+      <script>
+        (function () {
+          function setHH() {
+            var topBar = document.querySelector('.top-bar');
+            var topBarHeight = topBar ? topBar.getBoundingClientRect().height : 0;
+            document.documentElement.style.setProperty('--hero-topbar-height', topBarHeight + 'px');
+          }
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setHH);
+          } else {
+            setHH();
+          }
+          window.addEventListener('resize', setHH);
+        })();
+      </script>
+
+      <script>
+        (function() {
+          function initHeroDirect() {
+            var slider = document.getElementById('hero-slider-section');
+            if (!slider) return;
+
+            var bgSlides = slider.querySelectorAll('.hero-bg-slide');
+            var contents = slider.querySelectorAll('.hero-slide-content');
+            var tabBtns = slider.querySelectorAll('.hero-tab-btn');
+            var prevArrow = document.getElementById('hero-prev-arrow');
+            var nextArrow = document.getElementById('hero-next-arrow');
+            var folioCounter = document.getElementById('editorial-folio-counter');
+            var stageCounter = document.getElementById('stage-photo-counter');
+            var locText = document.getElementById('photo-location-text');
+
+            var locations = [
+              'Sede Río Real · Recepción Principal',
+              'Parcela Elviria · 6.650 m² Marbella',
+              'Sede Río Real · Sala de Terapias'
+            ];
+
+            if (!bgSlides.length) return;
+
+            var currentIndex = 0;
+            var total = bgSlides.length;
+            var autoPlayInterval = null;
+
+            function goTo(idx) {
+              if (idx < 0) idx = total - 1;
+              if (idx >= total) idx = 0;
+              currentIndex = idx;
+
+              for (var i = 0; i < total; i++) {
+                if (i === currentIndex) {
+                  bgSlides[i].classList.add('active');
+                  if (contents[i]) contents[i].classList.add('active');
+                  if (tabBtns[i]) tabBtns[i].classList.add('active');
+                } else {
+                  bgSlides[i].classList.remove('active');
+                  if (contents[i]) contents[i].classList.remove('active');
+                  if (tabBtns[i]) tabBtns[i].classList.remove('active');
+                }
+              }
+
+              if (folioCounter) {
+                folioCounter.textContent = 'EDICIÓN 2026 • 0' + (currentIndex + 1) + ' / 03';
+              }
+              if (stageCounter) {
+                stageCounter.textContent = '0' + (currentIndex + 1) + ' / 03';
+              }
+              if (locText && locations[currentIndex]) {
+                locText.textContent = locations[currentIndex];
+              }
+            }
+
+            window.heroGoToSlide = goTo;
+
+            if (prevArrow) {
+              prevArrow.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                goTo(currentIndex - 1);
+                resetTimer();
+              };
+            }
+
+            if (nextArrow) {
+              nextArrow.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                goTo(currentIndex + 1);
+                resetTimer();
+              };
+            }
+
+            tabBtns.forEach(function(btn) {
+              btn.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var target = parseInt(btn.getAttribute('data-slide-target'), 10);
+                goTo(target);
+                resetTimer();
+              };
+            });
+
+            function startTimer() {
+              stopTimer();
+              autoPlayInterval = setInterval(function() {
+                goTo(currentIndex + 1);
+              }, 6000);
+            }
+
+            function stopTimer() {
+              if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+              }
+            }
+
+            function resetTimer() {
+              startTimer();
+            }
+
+            slider.onmouseenter = stopTimer;
+            slider.onmouseleave = startTimer;
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+              if (window.scrollY < 400) {
+                if (e.key === 'ArrowRight') {
+                  goTo(currentIndex + 1);
+                  resetTimer();
+                } else if (e.key === 'ArrowLeft') {
+                  goTo(currentIndex - 1);
+                  resetTimer();
+                }
+              }
+            });
+
+            // Touch swipe
+            var touchStartX = 0;
+            slider.addEventListener('touchstart', function(e) {
+              touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            slider.addEventListener('touchend', function(e) {
+              var diffX = e.changedTouches[0].screenX - touchStartX;
+              if (Math.abs(diffX) > 45) {
+                if (diffX < 0) {
+                  goTo(currentIndex + 1);
+                } else {
+                  goTo(currentIndex - 1);
+                }
+                resetTimer();
+              }
+            }, { passive: true });
+
+            // Initialize
+            goTo(0);
+            startTimer();
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initHeroDirect);
+          } else {
+            initHeroDirect();
+          }
+        })();
+      </script>
+
+      <div id="inicio-contenido"></div>
       <!-- Quick Pillars Summary -->
       <div class="pillars-section container section-padding reveal">
         <div class="section-title-center">
@@ -220,7 +916,7 @@
       <div class="acrostic-section reveal">
         <div class="container">
           <div class="section-title-center">
-            <span class="pill-label label-amber">Toque de Sensibilización</span>
+            <span class="pill-label label-amber acrostic-label">Toque de Sensibilización</span>
             <h2>El Significado Detrás de las Palabras</h2>
             <p>Cada letra de **AUTISMO** nos recuerda el valor de cada persona única dentro del espectro. Pasa el cursor o haz clic en las letras para descubrirlo.</p>
           </div>
@@ -311,9 +1007,9 @@
 
         <div class="about-intro-grid reveal">
           <div class="about-intro-text">
-            <h3>Nuestra Historia</h3>
-            <p>Nacimos en **2002** de la mano de un grupo de madres y padres de niños y niñas autistas en la Costa del Sol. Surgimos de la necesidad vital de encontrar respuestas y tratamientos especializados en una época con recursos muy limitados.</p>
-            <p>Partimos del principio de que **la intervención temprana es clave** para mejorar la adaptación y la calidad de vida en el autismo. Hoy en día, superamos los 80 socios y atendemos a familias de toda la provincia de Málaga desde nuestra sede en Marbella.</p>
+            <h3>QUIENES SOMOS</h3>
+            <p>La Asociación de Autismo Ángel Rivière, conocida por sus siglas AAAR surge en 2002 en la Costa del Sol por un grupo de padres y madres, con el objetivo de cubrir las necesidades de sus hijos e hijas con autismo. Nuestra asociación tiene carácter provincial, nos ubicamos en Marbella que es dónde se encuentra nuestra sede. En la actualidad superamos los 80 socios con procedencia de toda la provincia de Málaga.</p>
+            <p>Elegimos poner este nombre en honor Ángel Rivière, psicólogo y científico cognitivo que hizo grandes aportaciones a la comunidad autista, fue el que diagnosticó a muchos de los hijos de los fundadores de nuestra asociación.</p>
             <blockquote class="accent-quote">
               "En la diversidad está el enriquecimiento"
             </blockquote>
@@ -344,8 +1040,7 @@
             <div class="riviere-text">
               <span class="label-badge">Homenaje</span>
               <h2>¿Quién fue Ángel Rivière?</h2>
-              <p>Nuestra asociación lleva con orgullo el nombre de **Ángel Rivière (1949-2000)**, psicólogo y científico cognitivo español, pionero indiscutible en la investigación del Trastorno del Espectro Autista en España. Él diagnosticó personalmente a muchos de los hijos de las familias fundadoras de AAAR, inspirando esperanza y aportando una visión profundamente humana y científica de la diversidad neurológica.</p>
-              <p>Su dedicación a las familias y su legado en el estudio de la teoría de la mente marcaron un antes y un después en la comprensión del autismo.</p>
+              <p>Elegimos poner este nombre en honor Ángel Rivière, psicólogo y científico cognitivo que hizo grandes aportaciones a la comunidad autista, fue el que diagnosticó a muchos de los hijos de los fundadores de nuestra asociación.</p>
               <a href="https://es.wikipedia.org/wiki/%C3%81ngel_Rivi%C3%A8re" target="_blank" class="btn btn-outline"><i class="fa-brands fa-wikipedia-w"></i> Leer Biografía en Wikipedia</a>
             </div>
             
@@ -387,38 +1082,32 @@
 
         <!-- Official Registries Section -->
         <div class="registries-section reveal" id="registros">
-          <h3>Transparencia: Registros Oficiales</h3>
-          <p class="section-desc">AAAR está plenamente homologada e inscrita en los principales organismos públicos de Andalucía y España:</p>
+          <h3>REGISTROS</h3>
+          <p class="section-desc">AAAR se encuentra inscrita en los siguientes registros</p>
           <div class="registries-grid">
             <div class="registry-card glass-card hover-lift">
               <span class="registry-num">Nº 6003</span>
-              <h4>Asociaciones de Andalucía</h4>
-              <p>Inscrita legalmente en el Registro General de Asociaciones.</p>
+              <h4>Registro de Asociaciones de Andalucía con el n°6003</h4>
             </div>
             <div class="registry-card glass-card hover-lift">
               <span class="registry-num">AS.E/ 4632</span>
-              <h4>Servicios Sociales</h4>
-              <p>Homologada por la Consejería de Inclusión Social y Familias.</p>
+              <h4>Registro de Servicios Sociales con n° AS.E/ 4632</h4>
             </div>
             <div class="registry-card glass-card hover-lift">
               <span class="registry-num">Nº 2113</span>
-              <h4>Censo de Enseñanza</h4>
-              <p>Entidad colaboradora de la Consejería de Educación de la Junta de Andalucía.</p>
+              <h4>Censo de Entidades Colaboradoras de la Enseñanza de la Consejería de Educación de la Junta de Andalucía n° 2113</h4>
             </div>
             <div class="registry-card glass-card hover-lift">
               <span class="registry-num">Nº 132</span>
-              <h4>Registro Municipal</h4>
-              <p>Acreditada en el Registro de Entidades Ciudadanas del Ayto. de Marbella.</p>
+              <h4>Registro Municipal de Entidades Ciudadanas con n°132</h4>
             </div>
             <div class="registry-card glass-card hover-lift">
               <span class="registry-num">Nº 2550</span>
-              <h4>Voluntariado de Andalucía</h4>
-              <p>Inscrita en el Registro General de Entidades de Voluntariado.</p>
+              <h4>Registro General de Entidades de Voluntariado de Andalucía con el n°2550</h4>
             </div>
             <div class="registry-card glass-card hover-lift">
               <span class="registry-num">Miembro</span>
-              <h4>Federación Autismo</h4>
-              <p>Miembro activo de la Federación Autismo Andalucía.</p>
+              <h4>Miembro de la Federación de Autismo - Andalucía</h4>
             </div>
           </div>
         </div>
@@ -447,6 +1136,41 @@
             </div>
           </div>
         </div>
+
+        <section class="activities-section reveal" id="actividades">
+          <div class="section-title-center">
+            <h2>ACTIVIDADES</h2>
+          </div>
+          <div class="team-copy-card glass-card">
+            <p>Las actividades que realiza AAAR se describen en el artículo 4 de sus Estatutos:</p>
+            <ol>
+              <li>Asistencia psicológica y moral a las familias de personas autistas.</li>
+              <li>Promover el bien común de las personas autistas, a través de actividades asistenciales, educativas, recreativas, culturales y deportivas.</li>
+              <li>Fomentar la colaboración entre las familias y la asistencia interdisciplinaria de profesionales especializados.</li>
+              <li>Asesorar a las familias de personas con autismo en cuestiones legales, sociológicas, y económicas.</li>
+              <li>Promocionar y difundir información respecto al diagnóstico del autismo, facilitando la adecuada asistencia.</li>
+              <li>Facilitar, mejorar y controlar la asistencia con el fin de mejorar su calidad de vida.</li>
+              <li>Formación del voluntariado</li>
+              <li>Fomento de la Colaboración/ inclusión con otras entidades</li>
+              <li>Visibilidad y Concienciación</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="team-copy-section reveal" id="equipo">
+          <div class="section-title-center">
+            <h2>EQUIPO</h2>
+          </div>
+          <div class="team-copy-card glass-card">
+            <p>Contamos con un amplio equipo de profesionales preparados para atender las necesidades de las personas con TEA, formados por psicopedagogos, pedagogos logopedas, psicólogos, maestros de educación especial y profesionales en prácticas.</p>
+            <p>Tenemos convenios con cinco Universidades andaluzas, para realizar prácticas tanto de Grado como de Máster, con la UGR, UMA y UNIR para su Máster de Psicología Clínica, con la UIV y acogemos a estudiantes de Erasmus</p>
+            <p>Queremos hacer una mención especial, de todos los voluntarios que han colaborado en algún momento con nosotros, su implicación es clave. GRACIAS</p>
+            <h3>Padres de la Asociación</h3>
+            <p>Es fundamental el trabajo de los profesionales terapeutas, pero una asociación sin el apoyo y el impulso de los padres no logra los objetivos marcados. Por lo que ya inició y aportó Ángel Rivière a la comunidad autista, nosotros como padres desde que pusimos en marcha AAAR quisimos hacer el camino más sencillo a nuestros hijos, a generaciones futuras y que la sociedad tenga cada vez más conciencia y empatía sobre el autismo.</p>
+            <p>Nos encanta esta frase y la utilizamos con frecuencia.</p>
+            <blockquote class="accent-quote">"EN LA DIVERSIDAD, ESTÁ EL ENRIQUECIMIENTO"</blockquote>
+          </div>
+        </section>
 
         <!-- Humanizing Families Testimonials Section [NUEVO] -->
         <div class="testimonials-section reveal" id="testimonios">
@@ -491,7 +1215,7 @@
       <div class="page-header-banner">
         <div class="container">
           <span class="pill-label label-amber">Apoyos Especializados</span>
-          <h2>Servicios y Terapias</h2>
+          <h2>NUESTROS SERVICIOS</h2>
           <p>Acompañamos el desarrollo cognitivo, social y la autonomía en todas las etapas de la vida.</p>
         </div>
       </div>
@@ -501,64 +1225,78 @@
         <div class="services-grid reveal">
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-stethoscope"></i></div>
-            <h3>Evaluación y Diagnóstico</h3>
+            <h3>EVALUACIÓN DE NIÑOS Y ADULTOS</h3>
             <p>Realizamos evaluaciones completas para niños, jóvenes y **adultos**. Un diagnóstico preciso es el primer paso para estructurar un plan de apoyo adecuado.</p>
             <span class="service-badge">Infantil y Adultos</span>
           </div>
           
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-child-reaching"></i></div>
-            <h3>Intervención Temprana</h3>
+            <h3>INTERVENCIÓN TERAPÉUTICA INDIVIDUAL</h3>
             <p>Terapias individuales dirigidas a niños pequeños para potenciar al máximo el desarrollo comunicativo, motriz y social durante los años más plásticos del cerebro.</p>
             <span class="service-badge">Atención Temprana</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-comments"></i></div>
-            <h3>Intervención Terapéutica</h3>
-            <p>Sesiones individuales de psicología, logopedia y psicopedagogía enfocadas a mejorar las habilidades adaptativas y comunicativas en el día a día.</p>
-            <span class="service-badge">Individualizado</span>
+            <h3>GRUPOS DE HABILIDADES SOCIALES POR EDADES</h3>
+            <p>Grupos organizados por edades para desarrollar habilidades sociales, comunicación, autonomía y vínculos con iguales.</p>
+            <span class="service-badge">Grupos por Edades</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-paw"></i></div>
-            <h3>Terapia con Animales</h3>
+            <h3>TERAPIA CON ANIMALES</h3>
             <p>Terapias asistidas con animales que facilitan la interacción social, la regulación sensorial y emotional, de forma amigable y lúdica.</p>
             <span class="service-badge">Especializado</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-users-line"></i></div>
-            <h3>Grupos de Habilidades Sociales</h3>
-            <p>Talleres grupales organizados por rangos de edad. El espacio ideal para poner en práctica la interacción, empatía y creación de lazos de amistad con pares.</p>
-            <span class="service-badge">Grupos por Edades</span>
+            <h3>SALIDAS DE OCIO Y TIEMPO LIBRE</h3>
+            <p>Actividades de ocio y tiempo libre para disfrutar de experiencias compartidas, participación social y autonomía.</p>
+            <span class="service-badge">Ocio Inclusivo</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
-            <h3>Campamentos Estacionales</h3>
+            <h3>ORGANIZACIÓN DE CAMPAMENTOS ESTACIONALES</h3>
             <p>Campamentos semanales durante Semana Santa, verano y Navidad, proporcionando ocio adaptado a los usuarios y respiro a las familias.</p>
             <span class="service-badge">Ocio y Conciliación</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-swimmer"></i></div>
-            <h3>Deporte y Natación Adaptada</h3>
+            <h3>NATACIÓN ADAPTADA (DEPORTE ADAPTADO)</h3>
             <p>Sesiones de natación y actividades físicas adaptadas a las destrezas de cada participante, promoviendo la salud y la integración motriz.</p>
             <span class="service-badge">Deporte Adaptado</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-school"></i></div>
-            <h3>Intervención en Centros Escolares</h3>
+            <h3>INTERVENCIÓN EDUCATIVA EN CENTROS ESCOLARES</h3>
             <p>Asistencia y asesoramiento educativo en centros escolares para facilitar la inclusión real del alumno en el entorno de aprendizaje ordinario.</p>
             <span class="service-badge">Apoyo Escolar</span>
           </div>
 
           <div class="service-card glass-card hover-lift">
             <div class="service-icon"><i class="fa-solid fa-people-roof"></i></div>
-            <h3>Atención y Asesoramiento Familiar</h3>
+            <h3>ATENCION Y ASESORAMIENTO FAMILIAR</h3>
             <p>Formación para padres, talleres de resolución de dudas y encuentros periódicos de familias para compartir experiencias y tejer comunidad.</p>
+            <span class="service-badge">Familias</span>
+          </div>
+
+          <div class="service-card glass-card hover-lift">
+            <div class="service-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <h3>TALLERES DE FORMACIÓN</h3>
+            <p>Espacios de aprendizaje y apoyo para ampliar recursos, compartir herramientas y resolver dudas.</p>
+            <span class="service-badge">Formación</span>
+          </div>
+
+          <div class="service-card glass-card hover-lift">
+            <div class="service-icon"><i class="fa-solid fa-people-group"></i></div>
+            <h3>ENCUENTROS DE FAMILIAS</h3>
+            <p>Encuentros para compartir experiencias, generar red y acompañarnos durante las distintas etapas.</p>
             <span class="service-badge">Familias</span>
           </div>
         </div>
@@ -589,6 +1327,55 @@
             </div>
           </div>
         </div>
+        <section class="autism-guide reveal" id="el-autismo">
+          <div class="section-title-center">
+            <span class="pill-label label-amber">Conoce a continuación un poco más sobre el Autismo</span>
+            <h2>¿QUÉ ES EL AUTISMO?</h2>
+          </div>
+          <div class="autism-guide-card glass-card">
+            <p>El Trastorno del Espectro Autista (TEA), es una condición del neurodesarrollo que acompaña a la persona durante toda su vida. Se caracteriza por una forma diferente de percibir, procesar y responder a la información del entorno. El autismo no es una enfermedad, por lo que no se cura, sin embargo, con los apoyos adecuados, las personas con autismo pueden desarrollar sus habilidades, aumentar su autonomía y mejorar significativamente su calidad de vida.</p>
+            <p>Cada persona dentro del espectro es única. Por eso hablamos de espectro autista, existe una gran diversidad en la forma en que se manifiesta.</p>
+
+            <h3>Características del autismo</h3>
+            <p>Se pueden presentar dificultades en los siguientes aspectos:</p>
+            <ul>
+              <li>Comunicación e interacción social</li>
+              <li>Pueden existir dificultades para interpretar o utilizar ciertos aspectos de la comunicación social: comprender gestos o expresiones faciales</li>
+              <li>Mantener conversaciones</li>
+              <li>Interpretar dobles sentidos o ironías</li>
+              <li>Iniciar o mantener interacciones sociales</li>
+            </ul>
+            <p>A continuación, analizamos estas dificultades en tres áreas:</p>
+            <h4>Dificultades en la comunicación e interacción social</h4>
+            <p>Conlleva problemas para iniciar o mantener conversaciones, comprender gestos o expresiones faciales, hasta el uso pragmático del lenguaje (sarcasmo, dobles sentidos, normas o respetar turnos).</p>
+            <h4>2. Patrones restringidos o repetitivos de conducta, intereses o actividades</h4>
+            <p>Rigidez mental, necesidad de rutinas y necesidad de estructuras predecibles, dificultad ante los cambios, intereses intensos y específicos, movimientos repetitivos (estereotipias) Algunas conductas repetitivas, como balancearse, mover las manos o repetir sonidos, se conocen como stimming. Estas conductas suelen cumplir una función de regulación emocional o sensorial, ayudando a la persona a gestionar el estrés o la sobrecarga sensorial.</p>
+            <h4>Procesamiento sensorial y comportamiento</h4>
+            <p>Algunas personas presentan una sensibilidad sensorial diferente. Esto significa que pueden percibir los estímulos del entorno de manera más intensa o, por el contrario, menos intensa (hipersensibilidad o hiposensibilidad sensorial). Por ejemplo, algunos sonidos, luces, texturas u olores pueden resultar especialmente molestos.</p>
+            <p><em>*Importante: cada persona con autismo presenta estos rasgos con diferente intensidad. No hay dos manifestaciones iguales.</em></p>
+
+            <h3>Fortalezas</h3>
+            <p>Suelen destacar por una gran capacidad de concentración, atención al detalle, memoria excepcional y, a menudo, intereses profundos en áreas específicas como matemáticas, tecnología, música o arte. Poseen una forma única de interpretar el mundo.</p>
+            <h3>El autismo es un espectro</h3>
+            <p>Cuando se indica que el Autismo es un espectro o como se le conoce por las siglas TEA (Trastorno del Espectro Autista), se refiere a que el autismo no se manifiesta de la misma manera en todas las personas. Hay quien necesita más apoyos en su vida diaria, mientras que otras pueden desenvolverse con mayor autonomía.</p>
+            <p>Actualmente, se clasifica en Niveles de gravedad del Trastorno del espectro Autista según el DSM-5, basados en la intensidad de apoyo que necesita la persona:</p>
+            <h4>Nivel 1 – Requiere apoyo</h4>
+            <p>Pueden desenvolverse con cierta autonomía, pero presentan dificultades en la interacción social, la organización o la flexibilidad ante cambios. Pueden necesitar apoyo en contextos sociales, educativos o laborales.</p>
+            <h4>Nivel 2 – Requiere apoyo sustancial</h4>
+            <p>Las dificultades en la comunicación social y en la adaptación a cambios son más evidentes. Las rutinas suelen ser muy importantes y las conductas repetitivas pueden ser más frecuentes. Estas personas suelen necesitar apoyos más constantes en diferentes áreas de su vida.</p>
+            <h4>Nivel 3 – Requiere apoyo muy sustancial</h4>
+            <p>Las personas presentan grandes dificultades en la comunicación social y en la adaptación al entorno, por lo que requieren apoyos intensivos y continuos en su vida diaria.</p>
+            <h3>¿Qué causa el autismo?</h3>
+            <p>El autismo tiene una base principalmente genética, aunque también pueden influir factores biológicos relacionados con el desarrollo temprano del cerebro, factores prenatales como edad avanzada de los padres, complicaciones durante el embarazo o exposición a ciertas sustancias. Actualmente no existe una única causa conocida. La investigación científica señala que el autismo se origina por una compleja interacción de factores genéticos y ambientales. Es importante destacar que las vacunas no causan autismo, algo que ha sido demostrado de forma clara por múltiples estudios científicos.</p>
+            <h3>Comprender el autismo</h3>
+            <p>Las personas con autismo sienten, piensan y experimentan el mundo como cualquier otra persona: sienten alegría, tristeza, miedo, amor o enfado. Sin embargo, su forma de percibir el entorno y procesar la información puede ser diferente, lo que puede generar desafíos en una sociedad que muchas veces no está diseñada teniendo en cuenta la diversidad neurológica. Por ello, la comprensión, la inclusión y los apoyos adecuados son fundamentales para que cada persona pueda desarrollar su potencial y participar plenamente en la sociedad.</p>
+            <h3>DATOS IMPORTANTES</h3>
+            <ul>
+              <li>Cada 2 de abril se celebra desde el 2008 el Día Mundial de la Concienciación sobre el Autismo, este día fue establecido por la Asamblea General de las Naciones Unidas el 18 de diciembre de 2007</li>
+              <li>El síndrome de Asperger ya no existe como diagnóstico oficial desde 2013, cuando se integró dentro del Trastorno del Espectro Autista (TEA) en el manual diagnóstico DSM-5. La ciencia determinó que no existía una distinción clara entre el Asperger y otros niveles de autismo, unificando para un mejor diagnóstico y tratamiento bajo un mismo espectro, generalmente como TEA nivel 1</li>
+            </ul>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -608,8 +1395,9 @@
         <div class="concession-block reveal">
           <div class="concession-text">
             <h3>¿Por qué este proyecto?</h3>
-            <p>Actualmente, cuando las personas autistas llegan a la edad adulta, las opciones de apoyo especializado disminuyen drásticamente. Las familias se enfrentan a la angustia de no saber qué pasará con sus hijos cuando ellos falten o se hagan mayores.</p>
-            <p>Para solucionar esto, AAAR impulsó la cesión de suelo municipal. Tras un primer decreto en 2019 de una parcela en La Alzambra de solo 1.880 m² (que resultaba muy pequeña e insuficiente para un proyecto de residencia con viviendas tuteladas), el **Ayuntamiento de Marbella firmó el 13 de noviembre de 2025** la concesión definitiva de un terreno mucho más idóneo de **6.650 m²** en Santa María-Elviria.</p>
+            <p>Hemos detectado pocas opciones cuando las personas autistas crecen y se hacen mayores.</p>
+            <p>Para ello desde AAAR estamos trabajando en otro de nuestros objetivos y es CREAR UN CENTRO DE DIA, RESIDENCIA Y VIVIENDAS TUTELADAS PARA PERSONAS AUTISTAS, con la finalidad de ampliar servicios enfocados a la edad adulta, pretendemos con este proyecto, fomentar una mayor autonomía, capacitación para la etapa laboral, favorecer actividades académicas, de ocio, deporte y en definitiva favorecer más la inclusión. Estaría ubicado en Marbella y daría cobertura a toda la Costa del Sol, contaría con un amplio equipo multidisciplinar especializados en TEA (Trastorno del Espectro Autista).</p>
+            <p>Hemos recibido para este proyecto una concesión de una parcela que nos ha ofrecido el Ayuntamiento de Marbella y que está situada en Santa María-Elviria de 6.650m2. En estos momentos estamos en una primera fase, de desarrollo del proyecto.</p>
             
             <div class="tech-spec-card">
               <h4>Ficha Técnica del Terreno</h4>
@@ -623,11 +1411,14 @@
           </div>
           
           <div class="concession-images">
-            <!-- Dynamic comparison structure -->
             <div class="image-showcase">
+              <div class="image-wrapper image-wrapper-featured hover-lift">
+                <img src="assets/images/elviria-render-aereo.png" alt="Vista aérea del render del futuro Centro de Día, Residencia y Viviendas Tuteladas de Elviria">
+                <span class="image-label">Render principal · Vista aérea del proyecto</span>
+              </div>
               <div class="image-wrapper hover-lift">
-                <img src="assets/images/elviria_render.png" alt="Concepto arquitectónico de la futura sede en Elviria">
-                <span class="image-label">Propuesta de la Nueva Sede (Render 3D)</span>
+                <img src="assets/images/elviria-render-vistas.png" alt="Conjunto de vistas del render arquitectónico del proyecto Elviria">
+                <span class="image-label">Renders arquitectónicos · Vistas del proyecto</span>
               </div>
               <div class="image-wrapper hover-lift">
                 <img src="assets/images/foto_parcela.jpeg" alt="Fotografía real del terreno cedido en Elviria">
@@ -751,108 +1542,141 @@
     <section class="page-view" id="actualidad">
       <div class="page-header-banner">
         <div class="container">
-          <span class="pill-label label-amber">Espacio de Divulgación</span>
-          <h2>Actualidad y Noticias</h2>
-          <p>Campañas de concienciación, avances diagnósticos y guías para familias.</p>
+          <h2>Noticias y actualidad</h2>
+          <p>Información, convocatorias y proyectos de la Asociación de Autismo Ángel Rivière.</p>
         </div>
       </div>
       
       <div class="container section-padding">
+        <div class="blog-intro reveal">
+          <p>Consulta las publicaciones de la asociación: colaboraciones institucionales, convocatorias y oportunidades para participar.</p>
+          <span class="blog-source-link"><i class="fa-solid fa-book-open"></i> Archivo de AAAR</span>
+        </div>
 
-        <div class="news-grid">
-          <!-- Article 1: Signos de alerta (Featured Post) -->
-          <article class="news-card featured-news reveal">
-            <div class="news-content">
-              <span class="news-tag tag-important"><i class="fa-solid fa-triangle-exclamation"></i> Guía para Familias</span>
-              <h3>Signos de Alerta de Autismo en Niños de 2 a 3 Años</h3>
-              <p class="news-intro">Detectar el autismo de forma temprana es crucial para iniciar los apoyos terapéuticos que marquen una diferencia positiva en el desarrollo infantil. A esta edad (2-3 años), se pueden empezar a observar diferencias en el habla, el juego y las interacciones.</p>
-              
-              <div class="signs-detail-list">
-                <div class="sign-category">
-                  <h5>🗣️ Dificultades en el Lenguaje:</h5>
-                  <ul>
-                    <li>No dice palabras o tiene un vocabulario muy reducido.</li>
-                    <li>No combina dos palabras (por ejemplo: "quiero agua").</li>
-                    <li>Repite palabras o frases sin intención comunicativa (ecolalias).</li>
-                    <li>No responde cuando se le llama por su nombre.</li>
-                  </ul>
-                </div>
-                
-                <div class="sign-category">
-                  <h5>👁️ Interacción Social Diferente:</h5>
-                  <ul>
-                    <li>Evita o reduce de forma marcada el contacto visual.</li>
-                    <li>No señala con el dedo para compartir interés o pedir cosas.</li>
-                    <li>No imita gestos (como decir adiós) o acciones.</li>
-                    <li>Muestra desinterés por jugar o interactuar con otros niños.</li>
-                  </ul>
-                </div>
+        <div class="blog-filters reveal" aria-label="Filtrar noticias por categoría">
+          <button class="blog-filter active" data-filter="all">Todas</button>
+          <button class="blog-filter" data-filter="colaboracion">Colaboración</button>
+          <button class="blog-filter" data-filter="asociacion">Asociación</button>
+          <button class="blog-filter" data-filter="voluntariado">Voluntariado</button>
+          <button class="blog-filter" data-filter="comunicado">Comunicado</button>
+        </div>
 
-                <div class="sign-category">
-                  <h5>🧸 Juego poco variado o repetitivo:</h5>
-                  <ul>
-                    <li>Juega siempre de la misma manera con los mismos objetos.</li>
-                    <li>Alinea sistemáticamente juguetes, coches o piezas.</li>
-                    <li>Ausencia de juego simbólico (por ejemplo, imitar comer, acunar muñecos).</li>
-                  </ul>
-                </div>
-
-                <div class="sign-category">
-                  <h5>🔁 Conductas repetitivas (Stimming):</h5>
-                  <ul>
-                    <li>Movimientos repetitivos como aleteo de manos, balanceos o giros.</li>
-                    <li>Necesidad de rutinas muy marcadas y rigidez ante pequeños cambios.</li>
-                    <li>Conductas de regulación emocional y sensorial ante sobrecargas.</li>
-                  </ul>
-                </div>
-
-                <div class="sign-category">
-                  <h5>🔊 Sensibilidad sensorial:</h5>
-                  <ul>
-                    <li>Le molestan en exceso ciertos ruidos, luces intensas o texturas.</li>
-                    <li>Reacciona de manera exagerada o, por el contrario, parece no sentir ante estímulos.</li>
-                  </ul>
-                </div>
+        <div class="blog-grid" id="blog-grid">
+          <article class="blog-card blog-featured reveal" data-category="colaboracion">
+            <div class="blog-card-content">
+              <span class="blog-category category-blue">Colaboración institucional</span>
+              <span class="blog-media-type"><i class="fa-solid fa-image"></i> Imagen</span>
+              <div class="blog-card-thumbnail">
+                <img src="assets/images/blog/actividad-inclusion-aaar.png" alt="Espacio de inclusión y acompañamiento" loading="lazy">
               </div>
-
-              <div class="signs-conclusion-box">
-                <h5>⚠️ ¿Cuándo preocuparse?</h5>
-                <p>No es necesario que aparezcan todas estas señales. Si observas que tu hijo no habla o ha dejado de hablar, no responde a su nombre, no señala ni tiene intención de comunicarse, o ha perdido habilidades que ya tenía, te recomendamos consultar con un profesional.</p>
-                
-                <div class="post-blue-heart">
-                  <i class="fa-solid fa-heart" style="color: #2F80ED;"></i>
-                  <span>Un niño/a con autismo siente, aprende y se desarrolla, aunque lo haga de una manera diferente. Comprender sus necesidades es el primer paso para ayudarle.</span>
-                </div>
-                
-                <div class="signs-cta">
-                  <a href="#contacto" class="btn btn-coral">Solicitar Asesoramiento <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
+              <h3>Renovamos el convenio para 2024 con el Ayuntamiento de Marbella</h3>
+              <p>El acuerdo respalda las actividades de la asociación y el acompañamiento a personas autistas y sus familias.</p>
+              <button class="read-more-link blog-read-button" data-article="convenio">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </article>
 
-          <!-- Article 2: Dia mundial -->
-          <article class="news-card glass-card hover-lift reveal">
-            <div class="news-img" style="background-color: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem;"><i class="fa-solid fa-globe"></i></div>
-            <div class="news-content">
-              <span class="news-tag">2 de Abril</span>
-              <h3>Día Mundial de Concienciación sobre el Autismo</h3>
-              <p>Celebrado cada año desde 2008 tras su declaración por las Naciones Unidas. En AAAR organizamos talleres en Marbella, colgamos globos azules y nos unimos a campañas locales para concienciar sobre la inclusión escolar y laboral.</p>
-              <a href="#contacto" class="read-more-link">Ver actividades de este año <i class="fa-solid fa-chevron-right"></i></a>
+          <article class="blog-card reveal" data-category="asociacion">
+            <div class="blog-card-content">
+              <span class="blog-category category-yellow">Asociación</span>
+              <span class="blog-media-type"><i class="fa-solid fa-images"></i> Galería</span>
+              <div class="blog-card-thumbnail blog-thumbnail-gallery">
+                <img src="assets/images/hero-original-enhanced/hero-recepcion-mejorada.png" alt="Recepción de la asociación" loading="lazy">
+                <span class="blog-thumbnail-badge"><i class="fa-solid fa-images"></i> 3 imágenes</span>
+              </div>
+              <h3>Convocatoria de Asamblea Ordinaria y Extraordinaria</h3>
+              <p>Información dirigida a las personas asociadas sobre la convocatoria y participación en la asamblea.</p>
+              <button class="read-more-link blog-read-button" data-article="asamblea-ordinaria">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </article>
 
-          <!-- Article 3: Asperger update -->
-          <article class="news-card glass-card hover-lift reveal">
-            <div class="news-img" style="background-color: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem;"><i class="fa-solid fa-book-medical"></i></div>
-            <div class="news-content">
-              <span class="news-tag">Manual DSM-5</span>
-              <h3>La Integración del Síndrome de Asperger en el TEA</h3>
-              <p>Desde el año 2013, el diagnóstico oficial de Síndrome de Asperger fue incorporado bajo el término general de Trastorno del Espectro Autista (TEA), tratándose clínicamente como TEA Nivel 1. Esto facilita la obtención de apoyos unificados.</p>
-              <a href="#servicios" class="read-more-link">Niveles de apoyo <i class="fa-solid fa-chevron-right"></i></a>
+          <article class="blog-card reveal" data-category="voluntariado">
+            <div class="blog-card-content">
+              <span class="blog-category category-green">Voluntariado</span>
+              <span class="blog-media-type"><i class="fa-solid fa-video"></i> Vídeo</span>
+              <div class="blog-card-thumbnail blog-thumbnail-video">
+                <img src="https://i.ytimg.com/vi/fSZYFWM0bdM/hqdefault.jpg" alt="Vídeo de presentación de la asociación" loading="lazy">
+                <span class="blog-thumbnail-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              </div>
+              <h3>Formación para el servicio de apoyo a la inclusión, ocio y tiempo libre</h3>
+              <p>Una convocatoria formativa para colaborar en actividades de inclusión y acompañamiento.</p>
+              <button class="read-more-link blog-read-button" data-article="formacion-voluntariado">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+          <article class="blog-card reveal" data-category="voluntariado">
+            <div class="blog-card-content">
+              <span class="blog-category category-green">Voluntariado</span>
+              <span class="blog-media-type"><i class="fa-solid fa-headphones"></i> Audio</span>
+              <div class="blog-card-thumbnail">
+                <img src="assets/images/hero-original-enhanced/hero-sala-familiar-mejorada.png" alt="Sala de atención familiar" loading="lazy">
+              </div>
+              <h3>Voluntariado con chicos y chicas con autismo</h3>
+              <p>Una invitación a participar y compartir tiempo de ocio, apoyo y experiencias inclusivas.</p>
+              <button class="read-more-link blog-read-button" data-article="voluntariado">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+          <article class="blog-card reveal" data-category="comunicado">
+            <div class="blog-card-content">
+              <span class="blog-category category-red">Comunicado</span>
+              <span class="blog-media-type"><i class="fa-solid fa-image"></i> Imagen</span>
+              <div class="blog-card-thumbnail">
+                <img src="assets/images/hero-original-enhanced/hero-recepcion-mejorada.png" alt="Recepción de la asociación" loading="lazy">
+              </div>
+              <h3>Comunicado de la asociación</h3>
+              <p>Información institucional compartida por AAAR con su comunidad de familias y personas asociadas.</p>
+              <button class="read-more-link blog-read-button" data-article="comunicado">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+          <article class="blog-card reveal" data-category="comunicado">
+            <div class="blog-card-content">
+              <span class="blog-category category-red">Comunicado</span>
+              <span class="blog-media-type"><i class="fa-solid fa-image"></i> Imagen</span>
+              <div class="blog-card-thumbnail">
+                <img src="assets/images/hero-original-enhanced/hero-sala-terapia-mejorada.png" alt="Sala adaptada de la asociación" loading="lazy">
+              </div>
+              <h3>Comunicado ante el estado de alerta por COVID-19</h3>
+              <p>Actualización de la asociación para mantener informada a la comunidad durante el estado de alerta.</p>
+              <button class="read-more-link blog-read-button" data-article="covid">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+          <article class="blog-card reveal" data-category="asociacion">
+            <div class="blog-card-content">
+              <span class="blog-category category-blue">Asociación</span>
+              <span class="blog-media-type"><i class="fa-solid fa-image"></i> Imagen</span>
+              <div class="blog-card-thumbnail">
+                <img src="assets/images/hero-original-enhanced/hero-sala-familiar-mejorada.png" alt="Sala de atención familiar" loading="lazy">
+              </div>
+              <h3>Convocatoria de Asamblea Extraordinaria</h3>
+              <p>Consulta la convocatoria publicada por AAAR para la participación de las personas asociadas.</p>
+              <button class="read-more-link blog-read-button" data-article="asamblea-extraordinaria">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+          <article class="blog-card reveal" data-category="asociacion">
+            <div class="blog-card-content">
+              <span class="blog-category category-blue">Asociación</span>
+              <span class="blog-media-type"><i class="fa-solid fa-book-open"></i> Guía</span>
+              <div class="blog-card-thumbnail">
+                <img src="assets/images/blog/actividad-inclusion-aaar.png" alt="Espacio de orientación y acompañamiento a familias" loading="lazy">
+              </div>
+              <h3>Signos de alerta de autismo en niños de 2 a 3 años</h3>
+              <p>Señales tempranas, orientación para familias y los siguientes pasos para solicitar apoyo.</p>
+              <button class="read-more-link blog-read-button" data-article="signos-alerta">Leer publicación <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </article>
         </div>
+
+        <article class="blog-reader" id="blog-reader" hidden aria-live="polite">
+          <button class="blog-back-button" id="blog-back-button"><i class="fa-solid fa-arrow-left"></i> Volver a actualidad</button>
+          <span class="blog-category" id="blog-reader-category"></span>
+          <h3 id="blog-reader-title"></h3>
+          <div class="blog-reader-meta" id="blog-reader-date"></div>
+          <div class="blog-reader-media" id="blog-reader-media"></div>
+          <div class="blog-reader-body" id="blog-reader-body"></div>
+        </article>
 
         <!-- Social networks section -->
         <div class="social-feeds-block reveal">
@@ -985,18 +1809,10 @@
         <div class="colab-entities-section reveal">
           <h3>Entidades Colaboradoras</h3>
           <p>Agradecemos sinceramente el apoyo y las sinergias construidas con las siguientes entidades colaboradoras:</p>
-          <div class="entities-logo-grid">
-            <div class="entity-logo hover-lift">M.I. Ayuntamiento de Marbella</div>
-            <div class="entity-logo hover-lift">Fundación "La Caixa"</div>
-            <div class="entity-logo hover-lift">CaixaBank</div>
-            <div class="entity-logo hover-lift">Rotary Marbella Club</div>
-            <div class="entity-logo hover-lift">Aguja Solidaria</div>
-            <div class="entity-logo hover-lift">Fuerte Nagüeles</div>
-            <div class="entity-logo hover-lift">Asociación CADI</div>
-            <div class="entity-logo hover-lift">Global Gift Foundation</div>
-            <div class="entity-logo hover-lift">Alar Consultores</div>
-            <div class="entity-logo hover-lift">CD Marbella Juega</div>
+          <div class="partners-marquee" aria-label="Entidades colaboradoras">
+            <div class="partners-marquee-track" id="partners-marquee-track"></div>
           </div>
+          <p class="partners-marquee-hint"><i class="fa-solid fa-arrow-pointer"></i> Pulsa sobre cualquier logotipo para visitar su web.</p>
         </div>
       </div>
     </section>
@@ -1039,6 +1855,13 @@
                 <div class="detail-text">
                   <strong>Correo Electrónico:</strong>
                   <span>autismoaaar@gmail.com</span>
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-globe"></i>
+                <div class="detail-text">
+                  <strong>Web:</strong>
+                  <span><a href="https://autismoaaar.org" target="_blank" rel="noopener">autismoaaar.org</a></span>
                 </div>
               </div>
             </div>
@@ -1120,17 +1943,21 @@
   <footer class="main-footer">
     <div class="container footer-grid">
       <div class="footer-brand-col">
-        <div class="logo-area logo-light">
-          <div class="logo-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
-          <div class="logo-text">
-            <span class="logo-title">AUTISMO</span>
-            <span class="logo-subtitle">Ángel Rivière</span>
-          </div>
+        <div class="footer-vector-logo">
+          <img src="assets/images/aaar-logo-vectorizado.png" alt="Asociación Autismo Ángel Rivière">
         </div>
         <p class="footer-desc">Trabajando desde 2002 por la inclusión, el desarrollo y la calidad de vida de las personas con Trastorno del Espectro Autista en Marbella y la Costa del Sol.</p>
         <div class="social-links">
-          <a href="https://www.instagram.com/autismoaaar/" target="_blank" aria-label="Síguenos en Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.facebook.com/Asoc-Autismo-Angel-Riviere-Marbella-112349733917890/" target="_blank" aria-label="Síguenos en Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a class="social-instagram" href="https://www.instagram.com/autismoaaar/" target="_blank" aria-label="Síguenos en Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a class="social-facebook" href="https://www.facebook.com/Asoc-Autismo-Angel-Riviere-Marbella-112349733917890/" target="_blank" aria-label="Síguenos en Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+        <div class="footer-partner-logos" aria-label="Entidades vinculadas">
+          <div class="footer-partner-logo">
+            <img src="assets/images/logo-ayuntamiento-marbella.png" alt="Excmo. Ayuntamiento de Marbella">
+          </div>
+          <div class="footer-partner-logo">
+            <img src="assets/images/logo-confederacion-autismo.png" alt="Confederación Autismo España">
+          </div>
         </div>
       </div>
       
@@ -1160,6 +1987,7 @@
       <div class="container footer-bottom-content">
         <p>Copyright &copy; 2026 Asociación de Autismo Ángel Rivière. Todos los derechos reservados.</p>
         <div class="footer-bottom-links">
+          <a class="footer-statutes-link" href="/documentos/estatutos.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Estatutos</a>
           <a href="#contacto">Aviso Legal</a>
           <a href="#contacto">Política de Privacidad</a>
           <a href="#contacto">Cookies</a>
@@ -1168,7 +1996,11 @@
     </div>
   </footer>
 
+  <!-- GSAP & ScrollTrigger for Cinematic Scroll Experience -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
   <!-- JS Logic -->
-  <script src="app.js?v=1.0.6"></script>
+  <script type="module" src="/app.js?v=2.8.0"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
    copy IBAN, scroll reveals, full-screen lightbox video, and dynamic floating button.
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
 
   // --- 1. MOBILE NAVIGATION MENU TOGGLE ---
   const mobileToggle = document.getElementById('mobile-toggle');
@@ -103,14 +103,34 @@ document.addEventListener('DOMContentLoaded', () => {
   router();
 
 
+  // --- 2b. TRANSPARENT HEADER OVER THE INICIO HERO PHOTO ---
+  const mainHeader = document.querySelector('.main-header');
+  const heroSliderSection = document.getElementById('hero-slider-section');
+
+  function updateHeaderTransparency() {
+    if (!mainHeader || !heroSliderSection) return;
+    const hash = window.location.hash || '#inicio';
+    const onInicio = hash === '#inicio' || hash === '#' || hash === '';
+    const heroHeight = heroSliderSection.offsetHeight;
+    const shouldBeTransparent = onInicio && window.scrollY < Math.max(heroHeight - 120, 0);
+    mainHeader.classList.toggle('header-transparent', shouldBeTransparent);
+  }
+
+  window.addEventListener('scroll', updateHeaderTransparency, { passive: true });
+  window.addEventListener('hashchange', updateHeaderTransparency);
+  window.addEventListener('resize', updateHeaderTransparency);
+  updateHeaderTransparency();
+
+
   // --- 3. VIDEO LIGHTBOX MODAL ---
   const triggerVideoModal = document.getElementById('trigger-video-modal');
+  const triggerVideoHeroModal = document.getElementById('trigger-video-hero-modal');
   const videoModal = document.getElementById('video-modal');
   const videoModalClose = document.getElementById('video-modal-close');
   const videoModalOverlay = document.getElementById('video-modal-overlay');
   const lightboxVideo = document.getElementById('lightbox-video');
 
-  if (triggerVideoModal && videoModal && lightboxVideo) {
+  if (videoModal && lightboxVideo) {
     const openModal = () => {
       videoModal.classList.add('active');
       videoModal.setAttribute('aria-hidden', 'false');
@@ -124,7 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lightboxVideo.currentTime = 0; // Reset video to beginning
     };
 
-    triggerVideoModal.addEventListener('click', openModal);
+    if (triggerVideoModal) triggerVideoModal.addEventListener('click', openModal);
+    if (triggerVideoHeroModal) triggerVideoHeroModal.addEventListener('click', openModal);
     
     if (videoModalClose) videoModalClose.addEventListener('click', closeModal);
     if (videoModalOverlay) videoModalOverlay.addEventListener('click', closeModal);
@@ -169,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const acrosticData = {
     'A': {
       title: 'Auténtico',
-      desc: 'Las personas autistas se expresan de forma sincera y sin filtros sociales artificiales, ofreciendo una visión directa, pura y auténtica de su mundo interior.'
+      desc: 'En el autismo se expresan de forma sincera y sin filtros sociales artificiales, ofreciendo una visión directa, pura y auténtica de su mundo interior.'
     },
     'U': {
       title: 'Único',
@@ -197,6 +218,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const acrosticColors = {
+    'A': 'var(--brand-yellow)',
+    'U': 'var(--brand-green)',
+    'T': 'var(--brand-red)',
+    'I': 'var(--brand-blue)',
+    'S': 'var(--brand-yellow)',
+    'M': 'var(--brand-red)',
+    'O': 'var(--brand-blue)'
+  };
+
   letterBoxes.forEach(box => {
     const handleLetterSelection = () => {
       // Remove active class from all letters
@@ -208,7 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Get letter data
       const letter = box.getAttribute('data-letter');
       if (acrosticData[letter]) {
-        detailTitle.textContent = `${letter} - ${acrosticData[letter].title}`;
+        detailTitle.textContent = acrosticData[letter].title;
+        detailTitle.style.color = acrosticColors[letter];
         detailDesc.textContent = acrosticData[letter].desc;
         
         // Add subtle animation trigger
@@ -229,7 +261,365 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // --- 6. INTERACTIVE TIMELINE ROADMAP: ELVIRIA ---
+  // --- 6. BLOG: LOCAL READER AND CATEGORY FILTERS ---
+  const blogPosts = {
+    convenio: {
+      category: 'Colaboración institucional',
+      categoryClass: 'category-blue',
+      date: '23 de octubre · Proyecto 2024',
+      title: 'Renovamos el convenio para 2024 con el Ayuntamiento de Marbella',
+      body: [
+        'La Asociación de Autismo Ángel Rivière renueva su colaboración con el Ayuntamiento de Marbella para dar continuidad a las actividades dirigidas a personas autistas y sus familias.',
+        'El apoyo permite sostener servicios de acompañamiento, actividades de ocio y tiempo libre, así como el trabajo diario que realiza la asociación con la comunidad.'
+      ],
+      media: {
+        type: 'image',
+        src: new URL('./assets/images/blog/actividad-inclusion-aaar.png', import.meta.url).href,
+        alt: 'Espacio luminoso preparado para una actividad de inclusión y acompañamiento',
+        caption: 'Actividad de acompañamiento e inclusión · Imagen editorial'
+      }
+    },
+    'asamblea-ordinaria': {
+      category: 'Asociación',
+      categoryClass: 'category-yellow',
+      date: '20 de octubre',
+      title: 'Convocatoria de Asamblea Ordinaria y Extraordinaria',
+      body: [
+        'AAAR comparte con las personas asociadas la convocatoria de Asamblea Ordinaria y Extraordinaria.',
+        'Este espacio de participación permite conocer la actividad de la asociación, compartir propuestas y tomar parte en las decisiones que orientan sus próximos pasos.'
+      ],
+      media: {
+        type: 'slider',
+        label: 'Galería de espacios AAAR',
+        items: [
+          { src: 'assets/images/hero-original-enhanced/hero-recepcion-mejorada.png', alt: 'Recepción de la asociación', caption: 'Un espacio de bienvenida para familias y personas usuarias.' },
+          { src: 'assets/images/hero-original-enhanced/hero-sala-familiar-mejorada.png', alt: 'Sala de atención familiar', caption: 'Atención y acompañamiento a las familias.' },
+          { src: 'assets/images/hero-original-enhanced/hero-sala-terapia-mejorada.png', alt: 'Sala de terapia sensorial', caption: 'Entornos adaptados para el desarrollo individual.' }
+        ]
+      }
+    },
+    'formacion-voluntariado': {
+      category: 'Voluntariado',
+      categoryClass: 'category-green',
+      date: '16 de abril',
+      title: 'Formación para el servicio de apoyo a la inclusión, ocio y tiempo libre',
+      body: [
+        'La asociación impulsa una formación para personas voluntarias interesadas en apoyar actividades de inclusión, ocio y tiempo libre.',
+        'El voluntariado amplía las oportunidades de participación social y acompaña a las personas autistas desde el respeto, la escucha y el apoyo individualizado.'
+      ],
+      media: {
+        type: 'video',
+        provider: 'youtube',
+        src: 'https://www.youtube.com/embed/fSZYFWM0bdM',
+        label: 'Vídeo de presentación de la asociación'
+      }
+    },
+    voluntariado: {
+      category: 'Voluntariado',
+      categoryClass: 'category-green',
+      date: '16 de abril',
+      title: 'Voluntariado con chicos y chicas con autismo',
+      body: [
+        'AAAR invita a las personas interesadas a colaborar en actividades de apoyo, ocio e inclusión junto a chicos y chicas con autismo.',
+        'Cada participación contribuye a construir entornos más accesibles, relaciones significativas y experiencias compartidas para toda la comunidad.'
+      ],
+      media: {
+        type: 'audio',
+        label: 'Audio de la asociación',
+        emptyMessage: 'Esta publicación está preparada para incorporar un enlace de audio cuando esté disponible.'
+      }
+    },
+    comunicado: {
+      category: 'Comunicado',
+      categoryClass: 'category-red',
+      date: '28 de mayo',
+      title: 'Comunicado de la asociación',
+      body: [
+        'AAAR publica este comunicado para mantener informadas a las familias, personas asociadas y entidades colaboradoras sobre asuntos de interés para la asociación.',
+        'La transparencia y la comunicación directa forman parte del compromiso de la entidad con toda su comunidad.'
+      ]
+    },
+    covid: {
+      category: 'Comunicado',
+      categoryClass: 'category-red',
+      date: '16 de marzo',
+      title: 'Comunicado ante el estado de alerta por COVID-19',
+      body: [
+        'La asociación compartió esta actualización para informar a su comunidad durante el estado de alerta por COVID-19.',
+        'El objetivo fue trasladar la información disponible y acompañar a las familias ante una situación excepcional.'
+      ]
+    },
+    'asamblea-extraordinaria': {
+      category: 'Asociación',
+      categoryClass: 'category-blue',
+      date: '19 de mayo',
+      title: 'Convocatoria de Asamblea Extraordinaria',
+      body: [
+        'AAAR publica la convocatoria de Asamblea Extraordinaria para facilitar la participación de las personas asociadas.',
+        'Las asambleas son una herramienta esencial para mantener una asociación abierta, participativa y conectada con las necesidades de sus familias.'
+      ]
+    },
+    'signos-alerta': {
+      category: 'Asociación',
+      categoryClass: 'category-blue',
+      date: 'Guía para familias',
+      title: 'Signos de alerta de autismo en niños de 2 a 3 años',
+      bodyHtml: `
+        <p>Sobre los 2 / 3 años de edad se pueden empezar a identificar señales de alarma en el desarrollo del lenguaje del niño, la interacción social y el comportamiento.</p>
+        <p>Detectarlos a tiempo es importante para poder ofrecerle los apoyos adecuados lo antes posible.</p>
+        <ul><li>Cada niño es diferente, pero existen señales tempranas que pueden ayudar a las familias a identificar si algo no va como se espera en su desarrollo.</li></ul>
+        <h4>🔍 SIGNOS DE AUTISMO EN NIÑOS DE 2 A 3 AÑOS</h4>
+        <p>A esta edad, algunos niños pueden mostrar ciertas diferencias en su forma de comunicarse, jugar o relacionarse.</p>
+        <h4>🗣️ Dificultades en el lenguaje</h4>
+        <p>No dice palabras o tiene muy pocas<br>No combina dos palabras (por ejemplo: “quiero agua”)<br>Repite palabras sin intención comunicativa<br>No responde a su nombre</p>
+        <h4>👁️ Interacción social diferente</h4>
+        <p>Evita o reduce el contacto visual<br>No señala para compartir interés (por ejemplo, enseñar algo)<br>No imita gestos o acciones<br>Parece no interesarse por otros niños</p>
+        <h4>🧸 Juego poco variado o repetitivo</h4>
+        <p>Juega siempre de la misma manera<br>Alinea objetos (coches, juguetes…)<br>No realiza juego simbólico (dar de comer a muñecos, por ejemplo)</p>
+        <h4>🔁 Conductas repetitivas</h4>
+        <p>Movimientos repetitivos (balanceo, aleteo de manos)<br>Necesidad de rutinas muy marcadas<br>Malestar intenso ante cambios</p>
+        <h4>🔊 Sensibilidad sensorial</h4>
+        <p>Le molestan sonidos, luces o texturas<br>Reacciona de forma intensa a ciertos estímulos o, por el contrario, parece no reaccionar</p>
+        <h4>⚠️ CUÁNDO PREOCUPARSE</h4>
+        <p>No es necesario que aparezcan todas las señales. Sin embargo, es recomendable consultar con un profesional si:</p>
+        <ul><li>El niño no habla o ha dejado de hablar</li><li>No responde a su nombre</li><li>No señala ni comparte intereses</li><li>No muestra intención de comunicarse</li><li>Hay pérdida de habilidades adquiridas</li></ul>
+        <h4>🩺 QUÉ HACER SI SOSPECHAS DE AUTISMO</h4>
+        <p>Si observas varias de estas señales: consulta con el pediatra, solicita una valoración del desarrollo, acude a un especialista en desarrollo infantil</p>
+        <p>La detección temprana permite iniciar apoyos que pueden marcar una gran diferencia en el desarrollo del niño</p>
+        <h4>📍 APOYO A FAMILIAS EN MÁLAGA</h4>
+        <p>Si buscas orientación sobre los síntomas del autismo en niños de 2 a 3 años en Marbella, Málaga o Andalucía. En AAAR, Asociación Autismo Ángel Riviere ofrecemos información, diagnóstico, acompañamiento, información sobre recursos y apoyo a familias durante todo el proceso.</p>
+        <p><i class="fa-solid fa-heart guide-blue-heart" aria-hidden="true"></i> Un niño/a con autismo siente, aprende y se desarrolla, aunque lo haga de una manera diferente. Comprender sus necesidades es el primer paso para ayudarle.</p>
+        <p>👉 Detectar a tiempo permite actuar antes y mejorar el desarrollo del niño.</p>
+        <h4>¿Tienes dudas sobre tu hijo?</h4>
+        <p>Si has identificado algunas de estas señales, no estás solo.</p>
+        <p>Podemos ayudarte a entender lo que está ocurriendo y orientarte en los siguientes pasos.</p>
+        <p>👉 <a href="#contacto">Contacta con nuestra asociación</a> y te acompañaremos en el proceso.</p>
+        <h4>SABER MÁS</h4>
+      `,
+      media: {
+        type: 'image',
+        src: new URL('./assets/images/blog/actividad-inclusion-aaar.png', import.meta.url).href,
+        alt: 'Espacio de orientación y acompañamiento a familias',
+        caption: 'Orientación y acompañamiento a familias'
+      }
+    }
+  };
+
+  const blogFilters = document.querySelectorAll('.blog-filter');
+  const blogCards = document.querySelectorAll('.blog-card');
+  const blogReadButtons = document.querySelectorAll('.blog-read-button');
+  const blogGrid = document.getElementById('blog-grid');
+  const blogIntro = document.querySelector('.blog-intro');
+  const blogFiltersWrap = document.querySelector('.blog-filters');
+  const blogReader = document.getElementById('blog-reader');
+  const blogBackButton = document.getElementById('blog-back-button');
+  const blogReaderCategory = document.getElementById('blog-reader-category');
+  const blogReaderTitle = document.getElementById('blog-reader-title');
+  const blogReaderDate = document.getElementById('blog-reader-date');
+  const blogReaderMedia = document.getElementById('blog-reader-media');
+  const blogReaderBody = document.getElementById('blog-reader-body');
+
+  blogFilters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      const selected = filter.dataset.filter;
+      blogFilters.forEach(item => item.classList.toggle('active', item === filter));
+      blogCards.forEach(card => {
+        card.hidden = selected !== 'all' && card.dataset.category !== selected;
+      });
+    });
+  });
+
+  function renderBlogMedia(media) {
+    if (!blogReaderMedia) return;
+    blogReaderMedia.replaceChildren();
+    blogReaderMedia.hidden = !media;
+    if (!media) return;
+
+    if (media.type === 'image') {
+      const figure = document.createElement('figure');
+      figure.className = 'article-image';
+      const image = document.createElement('img');
+      image.src = media.src;
+      image.alt = media.alt;
+      image.loading = 'eager';
+      const caption = document.createElement('figcaption');
+      caption.textContent = media.caption;
+      figure.append(image, caption);
+      blogReaderMedia.append(figure);
+      return;
+    }
+
+    if (media.type === 'slider') {
+      const slider = document.createElement('section');
+      slider.className = 'article-slider';
+      slider.setAttribute('aria-label', media.label);
+      const image = document.createElement('img');
+      const caption = document.createElement('p');
+      caption.className = 'article-slider-caption';
+      const controls = document.createElement('div');
+      controls.className = 'article-slider-controls';
+      const previous = document.createElement('button');
+      previous.type = 'button';
+      previous.setAttribute('aria-label', 'Imagen anterior');
+      previous.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
+      const counter = document.createElement('span');
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.setAttribute('aria-label', 'Imagen siguiente');
+      next.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
+      controls.append(previous, counter, next);
+      slider.append(image, caption, controls);
+
+      let currentItem = 0;
+      const updateSlide = () => {
+        const item = media.items[currentItem];
+        image.src = item.src;
+        image.alt = item.alt;
+        caption.textContent = item.caption;
+        counter.textContent = `${currentItem + 1} / ${media.items.length}`;
+      };
+      previous.addEventListener('click', () => {
+        currentItem = (currentItem - 1 + media.items.length) % media.items.length;
+        updateSlide();
+      });
+      next.addEventListener('click', () => {
+        currentItem = (currentItem + 1) % media.items.length;
+        updateSlide();
+      });
+      updateSlide();
+      blogReaderMedia.append(slider);
+      return;
+    }
+
+    if (media.type === 'video' && media.provider === 'youtube') {
+      const mediaFrame = document.createElement('div');
+      mediaFrame.className = 'article-video';
+      const label = document.createElement('p');
+      label.className = 'article-media-label';
+      label.innerHTML = `<i class="fa-solid fa-video"></i> ${media.label}`;
+      const iframe = document.createElement('iframe');
+      iframe.src = media.src;
+      iframe.title = media.label;
+      iframe.loading = 'lazy';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      mediaFrame.append(label, iframe);
+      blogReaderMedia.append(mediaFrame);
+      return;
+    }
+
+    const mediaFrame = document.createElement('div');
+    mediaFrame.className = `article-${media.type}`;
+    const label = document.createElement('p');
+    label.className = 'article-media-label';
+    label.innerHTML = `<i class="fa-solid fa-${media.type === 'video' ? 'video' : 'headphones'}"></i> ${media.label}`;
+    if (!media.src) {
+      const empty = document.createElement('p');
+      empty.className = 'article-media-empty';
+      empty.textContent = media.emptyMessage;
+      mediaFrame.append(label, empty);
+      blogReaderMedia.append(mediaFrame);
+      return;
+    }
+
+    const player = document.createElement(media.type);
+    player.controls = true;
+    player.preload = 'metadata';
+    if (media.poster) player.poster = media.poster;
+    const source = document.createElement('source');
+    source.src = media.src;
+    source.type = 'video/mp4';
+    player.append(source);
+    mediaFrame.append(label, player);
+    blogReaderMedia.append(mediaFrame);
+  }
+
+  function showBlogPost(postId) {
+    const post = blogPosts[postId];
+    if (!post || !blogReader || !blogReaderCategory || !blogReaderTitle || !blogReaderDate || !blogReaderBody) return;
+
+    blogReaderCategory.className = `blog-category ${post.categoryClass}`;
+    blogReaderCategory.textContent = post.category;
+    blogReaderTitle.textContent = post.title;
+    blogReaderDate.textContent = post.date;
+    renderBlogMedia(post.media);
+    if (post.bodyHtml) {
+      blogReaderBody.innerHTML = post.bodyHtml;
+    } else {
+      blogReaderBody.replaceChildren(...post.body.map(text => {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        return paragraph;
+      }));
+    }
+
+    if (blogIntro) blogIntro.hidden = true;
+    if (blogFiltersWrap) blogFiltersWrap.hidden = true;
+    if (blogGrid) blogGrid.hidden = true;
+    blogReader.hidden = false;
+    blogReader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function showBlogIndex() {
+    if (blogIntro) blogIntro.hidden = false;
+    if (blogFiltersWrap) blogFiltersWrap.hidden = false;
+    if (blogGrid) blogGrid.hidden = false;
+    if (blogReader) blogReader.hidden = true;
+    if (blogIntro) blogIntro.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  blogReadButtons.forEach(button => {
+    button.addEventListener('click', () => showBlogPost(button.dataset.article));
+  });
+
+  if (blogBackButton) blogBackButton.addEventListener('click', showBlogIndex);
+
+  // --- 7. PARTNER MARQUEE ---
+  // Keystatic-ready fields for each collaborator: title, logo and link.
+  const partners = [
+    { title: 'Ayuntamiento de Marbella', logo: 'https://www.google.com/s2/favicons?domain=ayuntamiento.marbella.es&sz=256', link: 'https://ayuntamiento.marbella.es/' },
+    { title: 'Fundación ”la Caixa”', logo: 'https://www.google.com/s2/favicons?domain=fundacionlacaixa.org&sz=256', link: 'https://fundacionlacaixa.org/es/' },
+    { title: 'CaixaBank', logo: 'https://www.google.com/s2/favicons?domain=caixabank.es&sz=256', link: 'https://www.caixabank.es/' },
+    { title: 'Rotary Club Marbella', logo: 'https://www.google.com/s2/favicons?domain=rotaryclubmarbella.es&sz=256', link: 'https://rotaryclubmarbella.es/' },
+    { title: 'Aguja Solidaria', logo: 'https://www.google.com/s2/favicons?domain=agujasolidaria.org&sz=256', link: 'https://agujasolidaria.org/' },
+    { title: 'Fuerte Nagüeles', logo: 'https://www.google.com/s2/favicons?domain=fuertenagueles.com&sz=256', link: 'https://fuertenagueles.com/' },
+    { title: 'Asociación CADI', logo: 'https://www.google.com/s2/favicons?domain=asociacioncadi.org&sz=256', link: 'https://www.asociacioncadi.org/' },
+    { title: 'Global Gift Foundation', logo: 'https://www.google.com/s2/favicons?domain=globalgiftfoundation.org&sz=256', link: 'https://www.globalgiftfoundation.org/es/' },
+    { title: 'Alar Consultores', logo: 'https://www.google.com/s2/favicons?domain=alarconsultores.com&sz=256', link: 'https://www.alarconsultores.com/' },
+    { title: 'CD Marbella Juega', logo: 'https://www.google.com/s2/favicons?domain=cdmarbellajuega.com&sz=256', link: 'https://www.cdmarbellajuega.com/' }
+  ];
+
+  const partnersTrack = document.getElementById('partners-marquee-track');
+  if (partnersTrack) {
+    const createPartnerSet = (isDuplicate = false) => {
+      const set = document.createElement('div');
+      set.className = 'partners-marquee-set';
+      if (isDuplicate) set.setAttribute('aria-hidden', 'true');
+      partners.forEach(partner => {
+        const link = document.createElement('a');
+        link.className = 'partner-logo-card';
+        link.href = partner.link;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', `Visitar web de ${partner.title}`);
+        const fallback = document.createElement('span');
+        fallback.className = 'partner-logo-fallback';
+        fallback.textContent = partner.title;
+        const image = document.createElement('img');
+        image.src = partner.logo;
+        image.alt = `Logotipo de ${partner.title}`;
+        image.loading = 'lazy';
+        image.addEventListener('error', () => image.remove());
+        link.append(fallback, image);
+        set.append(link);
+      });
+      return set;
+    };
+    partnersTrack.append(createPartnerSet(), createPartnerSet(true));
+  }
+
+
+  // --- 8. INTERACTIVE TIMELINE ROADMAP: ELVIRIA ---
   const roadmapBtns = document.querySelectorAll('.roadmap-btn');
   const roadmapDisplay = document.getElementById('roadmap-display');
   const phaseTitle = document.getElementById('phase-title');
@@ -524,4 +914,165 @@ startxref
     });
   }
 
-});
+
+  // --- 10. HERO SLIDER LUMÍNICO (CONTROLLER) ---
+  function initHeroSlider() {
+    const heroSlider = document.getElementById('hero-slider-section');
+    if (!heroSlider) return;
+
+    // The inline controller is initialized first. Avoid a second autoplay
+    // timer competing with it and making crossfades feel uneven.
+    if (typeof window.heroGoToSlide === 'function') return;
+
+    const bgSlides = heroSlider.querySelectorAll('.hero-bg-slide');
+    const contents = heroSlider.querySelectorAll('.hero-slide-content');
+    const tabBtns = heroSlider.querySelectorAll('.hero-tab-btn');
+    const prevArrow = document.getElementById('hero-prev-arrow');
+    const nextArrow = document.getElementById('hero-next-arrow');
+
+    if (bgSlides.length === 0) return;
+
+    let currentSlide = 0;
+    const totalSlides = bgSlides.length;
+    let autoPlayTimer = null;
+
+    function goToSlide(targetIndex) {
+      if (targetIndex < 0) targetIndex = totalSlides - 1;
+      if (targetIndex >= totalSlides) targetIndex = 0;
+
+      currentSlide = targetIndex;
+
+      // Update background slides
+      bgSlides.forEach((slide, i) => {
+        if (i === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update content layers
+      contents.forEach((content, i) => {
+        if (i === currentSlide) {
+          content.classList.add('active');
+        } else {
+          content.classList.remove('active');
+        }
+      });
+
+      // Update tab buttons
+      tabBtns.forEach((tab, i) => {
+        if (i === currentSlide) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+    }
+
+    // Expose globally for testing / control
+    window.goToHeroSlide = goToSlide;
+
+    // Arrow navigation
+    if (prevArrow) {
+      prevArrow.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToSlide(currentSlide - 1);
+        resetAutoPlay();
+      };
+    }
+
+    if (nextArrow) {
+      nextArrow.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToSlide(currentSlide + 1);
+        resetAutoPlay();
+      };
+    }
+
+    // Tab buttons
+    tabBtns.forEach(tab => {
+      tab.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const target = parseInt(tab.getAttribute('data-slide-target'), 10);
+        goToSlide(target);
+        resetAutoPlay();
+      };
+    });
+
+    // Auto-advance timer (every 6s)
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(() => {
+        goToSlide(currentSlide + 1);
+      }, 6000);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    function resetAutoPlay() {
+      startAutoPlay();
+    }
+
+    heroSlider.onmouseenter = stopAutoPlay;
+    heroSlider.onmouseleave = startAutoPlay;
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (window.scrollY < 400) {
+        if (e.key === 'ArrowRight') {
+          goToSlide(currentSlide + 1);
+          resetAutoPlay();
+        } else if (e.key === 'ArrowLeft') {
+          goToSlide(currentSlide - 1);
+          resetAutoPlay();
+        }
+      }
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    heroSlider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    heroSlider.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+        resetAutoPlay();
+      }
+    }, { passive: true });
+
+    // Initialize slide 0 & start auto-play
+    goToSlide(0);
+    startAutoPlay();
+  }
+
+  initHeroSlider();
+
+}
+
+// Robust execution whether DOM is already loaded or pending
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
