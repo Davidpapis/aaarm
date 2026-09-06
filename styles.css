@@ -4192,6 +4192,64 @@ textarea:focus-visible {
   }
 }
 
+/* The acrostic must leave room for its meaning on a phone screen. */
+@media (max-width: 640px) {
+  .acrostic-section {
+    padding: 46px 0;
+  }
+
+  .acrostic-interactive-container {
+    margin-top: 24px;
+    gap: 20px;
+  }
+
+  .acrostic-word-row {
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .letter-box {
+    width: min(46px, calc((100% - 24px) / 7));
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 1 / 1;
+    border-width: 2px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.14);
+  }
+
+  .letter-box .letter {
+    font-size: clamp(1.25rem, 6vw, 1.8rem);
+    -webkit-text-stroke-width: 1px;
+  }
+
+  .letter-box:hover,
+  .letter-box.active {
+    transform: scale(1.04);
+  }
+
+  .letter-detail-card {
+    padding: 24px 18px;
+  }
+
+  .detail-icon {
+    display: none;
+  }
+
+  .letter-detail-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .letter-detail-card p {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+}
+
 /* Print Styles */
 @media print {
   body {
