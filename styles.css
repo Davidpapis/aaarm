@@ -650,11 +650,14 @@ textarea:focus-visible {
   background-color: var(--color-white);
   border-bottom: 2px solid var(--color-border);
   box-shadow: 0 10px 20px rgb(var(--brand-blue-rgb) / 0.05);
-  position: absolute;
-  top: 85px;
+  position: fixed;
+  top: var(--mobile-menu-top, 85px);
   left: 0;
   width: 100%;
-  z-index: 99;
+  max-height: calc(100dvh - var(--mobile-menu-top, 85px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 1000;
   padding: 20px 24px;
 }
 
@@ -3995,6 +3998,24 @@ textarea:focus-visible {
 }
 
 @media (max-width: 768px) {
+  .header-container {
+    height: 70px;
+    padding: 0 18px;
+  }
+
+  .logo-link,
+  .site-logo-image {
+    width: 154px;
+  }
+
+  .main-header.header-transparent {
+    margin-bottom: -70px;
+  }
+
+  .mobile-nav.is-open {
+    display: block;
+  }
+
   .image-showcase {
     grid-template-columns: 1fr;
   }

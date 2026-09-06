@@ -12,17 +12,39 @@ function initApp() {
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
   if (mobileToggle && mobileMenu) {
+    const header = document.querySelector('.main-header');
+
+    const positionMobileMenu = () => {
+      if (!header) return;
+      const headerBottom = header.getBoundingClientRect().bottom;
+      document.documentElement.style.setProperty('--mobile-menu-top', `${Math.max(0, headerBottom)}px`);
+    };
+
+    const closeMobileMenu = () => {
+      mobileToggle.classList.remove('active');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('is-open');
+    };
+
     mobileToggle.addEventListener('click', () => {
       const isActive = mobileToggle.classList.toggle('active');
-      mobileMenu.style.display = isActive ? 'block' : 'none';
+      positionMobileMenu();
+      mobileToggle.setAttribute('aria-expanded', String(isActive));
+      mobileMenu.classList.toggle('is-open', isActive);
     });
 
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
-        mobileToggle.classList.remove('active');
-        mobileMenu.style.display = 'none';
+        closeMobileMenu();
       });
     });
+
+    window.addEventListener('resize', () => {
+      positionMobileMenu();
+      if (window.innerWidth > 768) closeMobileMenu();
+    }, { passive: true });
+    window.addEventListener('scroll', positionMobileMenu, { passive: true });
+    positionMobileMenu();
   }
 
 

@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- CSS Stylesheet (Direct mode for Vite dev & static compatibility) -->
-  <link rel="stylesheet" href="/styles.css?v=2.7.8">
+  <link rel="stylesheet" href="/styles.css?v=2.7.9">
 </head>
 <body>
 
@@ -95,7 +95,7 @@
       </div>
       
       <!-- Mobile Menu Button -->
-      <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación">
+      <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Abrir menú de navegación" aria-controls="mobile-menu" aria-expanded="false">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
@@ -543,26 +543,42 @@
         }
 
         @media (max-width: 640px) {
+          .hero-slider-section {
+            height: max(620px, calc(100dvh - var(--hero-topbar-height, 0px)));
+            min-height: max(620px, calc(100dvh - var(--hero-topbar-height, 0px)));
+          }
           .hero-magazine-title {
-            font-size: 1.85rem;
+            font-size: 1.72rem;
+            line-height: 1.18;
           }
           .hero-magazine-container {
             align-items: center;
-            padding: 108px 24px 170px;
+            padding: 90px 20px 82px;
           }
           .hero-editorial-column {
-            transform: translateY(-12px);
+            transform: none;
           }
           .hero-tabs-bar {
             width: 100%;
             justify-content: center;
+            gap: 2px;
+            padding: 4px;
           }
           .hero-tab-btn {
-            padding: 6px 10px;
-            font-size: 0.78rem;
+            flex: 1 1 0;
+            justify-content: center;
+            padding: 8px 4px;
+            font-size: 0.66rem;
+            gap: 0;
+            white-space: nowrap;
           }
-          .hero-scroll-down-hint span {
-            display: inline;
+          .hero-tab-btn .tab-index,
+          .tab-sep,
+          .hero-scroll-down-hint {
+            display: none;
+          }
+          .hero-bottom-magazine-bar {
+            padding: 0 12px 14px;
           }
           .magazine-footnote-list {
             display: none;
@@ -577,9 +593,18 @@
             padding: 7px 12px;
             font-size: 0.7rem;
           }
-          .hero-bottom-magazine-bar .hero-scroll-down-hint {
-            bottom: 82px;
-            white-space: nowrap;
+          .hero-magazine-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 9px;
+            margin-bottom: 0;
+          }
+          .magazine-btn-primary,
+          .magazine-btn-coral,
+          .magazine-btn-secondary {
+            justify-content: center;
+            padding: 11px 16px;
+            font-size: 0.88rem;
           }
         }
       </style>
@@ -714,7 +739,8 @@
           } else {
             setHH();
           }
-          window.addEventListener('resize', setHH);
+          window.addEventListener('resize', setHH, { passive: true });
+          window.addEventListener('orientationchange', setHH, { passive: true });
         })();
       </script>
 
@@ -2001,6 +2027,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
   <!-- JS Logic -->
-  <script type="module" src="/app.js?v=2.8.0"></script>
+  <script type="module" src="/app.js?v=2.8.1"></script>
 </body>
 </html>
