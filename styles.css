@@ -4055,16 +4055,26 @@ textarea:focus-visible {
   }
 
   .top-bar-left {
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px 11px;
+    width: 100%;
+  }
+
+  .top-bar {
+    padding: 6px 0;
+    font-size: 0.7rem;
+  }
+
+  .top-bar-left a {
+    gap: 4px;
+    line-height: 1.25;
+    white-space: nowrap;
   }
   
   .top-bar-right {
-    width: 100%;
-    text-align: left;
-    margin-top: 5px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 5px;
+    display: none;
   }
   
   .desktop-nav {
