@@ -1,6 +1,6 @@
 /* ==========================================================================
    JAVASCRIPT LOGIC: ASOCIACIÓN AUTISMO ÁNGEL RIVIÈRE
-   SPA ScrollSpy routing, acrostic letters, tax calculator, progress slider,
+   SPA ScrollSpy routing, acrostic letters, progress slider,
    copy IBAN, scroll reveals, full-screen lightbox video, and dynamic floating button.
    ========================================================================== */
 
@@ -212,7 +212,7 @@ function initApp() {
   const acrosticData = {
     'A': {
       title: 'Auténtico',
-      desc: 'En el autismo se expresan de forma sincera y sin filtros sociales artificiales, ofreciendo una visión directa, pura y auténtica de su mundo interior.'
+      desc: 'Las personas con autismo viven y expresan el mundo desde una mirada única y auténtica. Ser uno mismo también es una forma de conectar, sentir y aportar.'
     },
     'U': {
       title: 'Único',
@@ -288,17 +288,76 @@ function initApp() {
     convenio: {
       category: 'Colaboración institucional',
       categoryClass: 'category-blue',
-      date: '23 de octubre · Proyecto 2024',
-      title: 'Renovamos el convenio para 2024 con el Ayuntamiento de Marbella',
+      date: 'Subvención Municipal · 2025 / 2026',
+      title: 'Subvención del Ayuntamiento de Marbella 2025 y 2026 (56.000 €)',
       body: [
-        'La Asociación de Autismo Ángel Rivière renueva su colaboración con el Ayuntamiento de Marbella para dar continuidad a las actividades dirigidas a personas autistas y sus familias.',
-        'El apoyo permite sostener servicios de acompañamiento, actividades de ocio y tiempo libre, así como el trabajo diario que realiza la asociación con la comunidad.'
+        'La Asociación de Autismo Ángel Rivière agradece el respaldo continuado del Excmo. Ayuntamiento de Marbella mediante la concesión de las subvenciones correspondientes a los ejercicios 2025 y 2026.',
+        'Para el ejercicio 2026, el Ayuntamiento de Marbella ha otorgado una subvención por importe de 56.000 €, que permite dar continuidad y fortalecer los programas de atención terapéutica, orientación familiar, inclusión y actividades de acompañamiento dirigidas a las personas con TEA y sus familias en nuestro municipio.'
       ],
       media: {
         type: 'image',
+        src: new URL('./assets/images/blog/convenio-ayuntamiento-2026.jpg', import.meta.url).href,
+        alt: 'Firma del convenio de subvención con la Alcaldesa del Ayuntamiento de Marbella',
+        caption: 'Acto de firma del convenio de colaboración entre el Ayuntamiento de Marbella y AAAR'
+      }
+    },
+    'onda-cero': {
+      category: 'Entrevista en Radio',
+      categoryClass: 'category-yellow',
+      date: '26 de enero de 2026 · Onda Cero Marbella',
+      title: 'Onda Cero Marbella: La Asociación de Autismo Ángel Rivière trabaja para desarrollar su Centro de Día y Residencia',
+      bodyHtml: `
+        <p>Nuestra asociación ha participado en el programa <strong>"Más de Uno Marbella" de Onda Cero</strong> para dar a conocer el trabajo que estamos realizando para el desarrollo del futuro <strong>Centro de Día y Residencia</strong> en Marbella.</p>
+        <p>Durante la entrevista abordamos las necesidades de las personas con Trastorno del Espectro Autista al llegar a la etapa adulta y cómo este proyecto pionero ofrecerá atención especializada, autonomía y tranquilidad a las familias de toda la Costa del Sol.</p>
+        <p style="margin-top: 20px;">
+          <a href="https://www.ondacero.es/emisoras/andalucia/marbella/audios-podcast/mas-de-uno/asociacion-autismo-angel-riviere-trabaja-desarrollar-centro-dia_2026012669778296c48f6b4ee36ddbf5.html" target="_blank" rel="noopener noreferrer" class="btn btn-coral">
+            <i class="fa-solid fa-headphones"></i> Escuchar entrevista completa en Onda Cero
+          </a>
+        </p>
+      `,
+      media: {
+        type: 'image',
+        src: new URL('./assets/images/elviria-render-aereo.png', import.meta.url).href,
+        alt: 'Render del futuro Centro de Día y Residencia de AAAR',
+        caption: 'Proyecto del futuro Centro de Día y Residencia de la Asociación de Autismo Ángel Rivière'
+      }
+    },
+    'torneo-golf': {
+      category: 'Evento Solidario',
+      categoryClass: 'category-green',
+      date: 'Evento Benéfico · Marbella',
+      title: 'Torneo de Golf Solidario a beneficio de AAAR',
+      bodyHtml: `
+        <p>Queremos agradecer de corazón a todos los participantes, patrocinadores, voluntarios y colaboradores que hicieron posible nuestro <strong>Torneo de Golf Solidario</strong> a beneficio de la Asociación de Autismo Ángel Rivière.</p>
+        <p>Puedes ver el vídeo resumen de la jornada en nuestro canal oficial de Instagram:</p>
+        <p style="margin-top: 20px;">
+          <a href="https://www.instagram.com/reel/DZ9OHAntwPj/?igsh=MW9ibHo1cmJ4M3YxMQ==" target="_blank" rel="noopener noreferrer" class="btn btn-coral">
+            <i class="fa-brands fa-instagram"></i> Ver vídeo del Torneo de Golf en Instagram
+          </a>
+        </p>
+      `,
+      media: {
+        type: 'image',
         src: new URL('./assets/images/blog/actividad-inclusion-aaar.png', import.meta.url).href,
-        alt: 'Espacio luminoso preparado para una actividad de inclusión y acompañamiento',
-        caption: 'Actividad de acompañamiento e inclusión · Imagen editorial'
+        alt: 'Torneo de Golf Solidario AAAR',
+        caption: 'Jornada solidaria en apoyo a los proyectos de la asociación'
+      }
+    },
+    'loteria-navidad': {
+      category: 'Campaña Solidaria',
+      categoryClass: 'category-red',
+      date: 'Sorteo 22 de diciembre de 2026',
+      title: 'Lotería de Navidad 2026 (Nº 69.291): ¡No te quedes sin tu décimo!',
+      bodyHtml: `
+        <p>Ya puedes adquirir el décimo de la <strong>Lotería Nacional de Navidad 2026</strong> de la Asociación de Autismo Ángel Rivière de Marbella con el número <strong>69.291</strong> (donativo incluido: 23 €).</p>
+        <p>Con cada décimo colaboras directamente con el mantenimiento de nuestras terapias, servicios de apoyo familiar y el impulso de nuestro futuro Centro de Día y Residencia.</p>
+        <p>Contacta con nuestra sede en Río Real o llámanos al <strong>952 903 333 / 618 848 494</strong> para reservar tus décimos.</p>
+      `,
+      media: {
+        type: 'image',
+        src: new URL('./assets/images/blog/loteria-navidad-2026.jpg', import.meta.url).href,
+        alt: 'Décimo de Lotería de Navidad 2026 Nº 69.291 de la Asociación de Autismo Ángel Rivière',
+        caption: 'Lotería de Navidad 2026 · Número 69.291 · Asociación de Autismo Ángel Rivière'
       }
     },
     'asamblea-ordinaria': {
@@ -596,20 +655,158 @@ function initApp() {
 
   if (blogBackButton) blogBackButton.addEventListener('click', showBlogIndex);
 
+  // --- 6b. 3D DIGITAL BOOKSTORE & PDF READER MODAL ---
+  const btnJumpLibreria = document.getElementById('btn-jump-libreria');
+  const librarySection = document.getElementById('libreria-guias');
+  const libPills = document.querySelectorAll('.lib-pill');
+  const bookCards = document.querySelectorAll('.book-showcase-card');
+  const bookReadBtns = document.querySelectorAll('.btn-book-read');
+  const pdfModal = document.getElementById('pdf-reader-modal');
+  const pdfModalBackdrop = document.getElementById('pdf-reader-backdrop');
+  const pdfModalClose = document.getElementById('pdf-modal-close');
+  const pdfModalTitle = document.getElementById('pdf-modal-title');
+  const pdfModalIframe = document.getElementById('pdf-modal-iframe');
+  const pdfModalDownload = document.getElementById('pdf-modal-download');
+  const pdfModalNewtab = document.getElementById('pdf-modal-newtab');
+
+  if (btnJumpLibreria && librarySection) {
+    btnJumpLibreria.addEventListener('click', () => {
+      if (blogReader && !blogReader.hidden) {
+        showBlogIndex();
+      }
+      const headerOffset = 110;
+      const topPos = librarySection.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top: topPos, behavior: 'smooth' });
+    });
+  }
+
+  libPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const cat = pill.getAttribute('data-lib-filter');
+      libPills.forEach(p => p.classList.toggle('active', p === pill));
+      bookCards.forEach(card => {
+        const matches = cat === 'all' || card.getAttribute('data-lib-category') === cat;
+        card.hidden = !matches;
+        card.classList.toggle('is-filtered-out', !matches);
+      });
+    });
+  });
+
+  // Mobile/Touch toggle for book cards so tapping a book reveals the overlay
+  bookCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.btn-book-read') || e.target.closest('.btn-book-download')) {
+        return;
+      }
+      const wasActive = card.classList.contains('is-open');
+      bookCards.forEach(c => c.classList.remove('is-open'));
+      if (!wasActive) {
+        card.classList.add('is-open');
+      }
+    });
+  });
+
+  if (pdfModal && pdfModalIframe) {
+    const openPdfReader = (url, title) => {
+      if (pdfModalTitle) pdfModalTitle.textContent = title || 'Visor de Guía PDF';
+      pdfModalIframe.src = url;
+      if (pdfModalDownload) {
+        pdfModalDownload.href = url;
+        pdfModalDownload.setAttribute('download', (title || 'Guia-AAAR').replace(/[^a-zA-Z0-9_-]+/g, '-') + '.pdf');
+      }
+      if (pdfModalNewtab) {
+        pdfModalNewtab.href = url;
+      }
+      pdfModal.classList.add('active');
+      pdfModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closePdfReader = () => {
+      pdfModal.classList.remove('active');
+      pdfModal.setAttribute('aria-hidden', 'true');
+      pdfModalIframe.src = 'about:blank';
+      document.body.style.overflow = '';
+    };
+
+    bookReadBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const url = btn.getAttribute('data-pdf-url');
+        const title = btn.getAttribute('data-pdf-title');
+        if (url) openPdfReader(url, title);
+      });
+    });
+
+    if (pdfModalClose) pdfModalClose.addEventListener('click', closePdfReader);
+    if (pdfModalBackdrop) pdfModalBackdrop.addEventListener('click', closePdfReader);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+        closePdfReader();
+      }
+    });
+  }
+
   // --- 7. PARTNER MARQUEE ---
   // Keystatic-ready fields for each collaborator: title, logo and link.
   const partners = [
-    { title: 'Ayuntamiento de Marbella', logo: 'https://www.google.com/s2/favicons?domain=ayuntamiento.marbella.es&sz=256', link: 'https://ayuntamiento.marbella.es/' },
+    { title: 'Ayuntamiento de Marbella', logo: new URL('./assets/images/logo-ayuntamiento-marbella.png', import.meta.url).href, link: 'https://ayuntamiento.marbella.es/' },
+    { title: 'Plataforma para la Promoción del Voluntariado de Marbella', logo: new URL('./assets/images/logo-plataforma-voluntariado.jpg', import.meta.url).href, link: 'https://ayuntamiento.marbella.es/' },
     { title: 'Fundación ”la Caixa”', logo: 'https://www.google.com/s2/favicons?domain=fundacionlacaixa.org&sz=256', link: 'https://fundacionlacaixa.org/es/' },
     { title: 'CaixaBank', logo: 'https://www.google.com/s2/favicons?domain=caixabank.es&sz=256', link: 'https://www.caixabank.es/' },
     { title: 'Rotary Club Marbella', logo: 'https://www.google.com/s2/favicons?domain=rotaryclubmarbella.es&sz=256', link: 'https://rotaryclubmarbella.es/' },
     { title: 'Aguja Solidaria', logo: 'https://www.google.com/s2/favicons?domain=agujasolidaria.org&sz=256', link: 'https://agujasolidaria.org/' },
-    { title: 'Fuerte Nagüeles', logo: 'https://www.google.com/s2/favicons?domain=fuertenagueles.com&sz=256', link: 'https://fuertenagueles.com/' },
-    { title: 'Asociación CADI', logo: 'https://www.google.com/s2/favicons?domain=asociacioncadi.org&sz=256', link: 'https://www.asociacioncadi.org/' },
+    { title: 'Fuerte Nagüeles', logo: new URL('./assets/images/logo-fuerte-nagueles.png', import.meta.url).href, link: 'https://fuertenagueles.com/' },
+    { title: 'Asociación CADI', logo: new URL('./assets/images/logo-cadi.png', import.meta.url).href, link: 'https://www.asociacioncadi.org/' },
     { title: 'Global Gift Foundation', logo: 'https://www.google.com/s2/favicons?domain=globalgiftfoundation.org&sz=256', link: 'https://www.globalgiftfoundation.org/es/' },
     { title: 'Alar Consultores', logo: 'https://www.google.com/s2/favicons?domain=alarconsultores.com&sz=256', link: 'https://www.alarconsultores.com/' },
     { title: 'CD Marbella Juega', logo: 'https://www.google.com/s2/favicons?domain=cdmarbellajuega.com&sz=256', link: 'https://www.cdmarbellajuega.com/' }
   ];
+
+  // --- 7b. INTERACTIVE STATUTES PANEL IN REGISTROS ---
+  const btnToggleStatutes = document.getElementById('btn-toggle-statutes');
+  const btnCloseStatutes = document.getElementById('btn-close-statutes');
+  const statutesPanel = document.getElementById('statutes-expand-panel');
+  const statutesToggleLabel = document.getElementById('statutes-toggle-label');
+  const statutesToggleIcon = document.getElementById('statutes-toggle-icon');
+
+  if (btnToggleStatutes && statutesPanel) {
+    const setStatutesOpen = (open) => {
+      statutesPanel.hidden = !open;
+      btnToggleStatutes.setAttribute('aria-expanded', String(open));
+      btnToggleStatutes.classList.toggle('active', open);
+      if (statutesToggleLabel) {
+        statutesToggleLabel.textContent = open ? 'Ocultar los Estatutos' : 'Abrir y leer los Estatutos';
+      }
+      if (statutesToggleIcon) {
+        statutesToggleIcon.className = open ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+      }
+      if (open) {
+        setTimeout(() => {
+          statutesPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+      }
+    };
+
+    btnToggleStatutes.addEventListener('click', () => {
+      setStatutesOpen(statutesPanel.hidden);
+    });
+
+    btnToggleStatutes.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setStatutesOpen(statutesPanel.hidden);
+      }
+    });
+
+    if (btnCloseStatutes) {
+      btnCloseStatutes.addEventListener('click', () => {
+        setStatutesOpen(false);
+        btnToggleStatutes.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  }
 
   const partnersTrack = document.getElementById('partners-marquee-track');
   if (partnersTrack) {
@@ -646,50 +843,38 @@ function initApp() {
   const roadmapDisplay = document.getElementById('roadmap-display');
   const phaseTitle = document.getElementById('phase-title');
   const phaseDesc = document.getElementById('phase-desc');
-  const phasePercent = document.getElementById('phase-percent');
-  const phaseProgressFill = document.getElementById('phase-progress-fill');
   const phasePrice = document.getElementById('phase-price');
 
   const roadmapData = {
     '1': {
       num: 'Fase 1',
       title: 'Viabilidad, Fianza y Aceptación de Parcela',
-      desc: 'Conformidad oficial de la parcela de 6.650 m² firmada por la presidenta Lourdes Hijano Utrera y ratificada por unanimidad en la Asamblea Extraordinaria del 9 de octubre de 2025. Se ha tramitado y depositado la fianza administrativa municipal de 46.897,54 €.',
-      percent: '100%',
-      price: '46.897,54 €',
-      width: '100%'
+      desc: 'Conformidad oficial de la parcela de 6.650 m² ratificada por unanimidad en la Asamblea Extraordinaria del 9 de octubre de 2025.',
+      price: '46.897,54 €'
     },
     '2': {
       num: 'Fase 2',
       title: 'Desarrollo del Proyecto Básico y de Ejecución',
       desc: 'Redacción y visado técnico del proyecto arquitectónico del Centro de Día, Residencia y Viviendas Tuteladas. Incluye estudios topográficos, diseño de accesibilidad cognitiva, eficiencia energética y tramitación de licencias de obra.',
-      percent: '60%',
-      price: '75.000,00 €',
-      width: '60%'
+      price: '75.000,00 €'
     },
     '3': {
       num: 'Fase 3',
       title: 'Adecuación del Terreno y Cimentación',
       desc: 'Movimiento de tierras en la parcela de Santa María-Elviria, vallado perimetral de seguridad, dotación de accesos viales, acometidas básicas de agua/luz, y levantamiento de la cimentación principal (fase inicial de obra).',
-      percent: '15%',
-      price: '320.000,00 €',
-      width: '15%'
+      price: '320.000,00 €'
     },
     '4': {
       num: 'Fase 4',
       title: 'Estructura y Albañilería de Edificios',
       desc: 'Levantamiento de pilares, forjados de plantas, cerramientos exteriores de fachada con aislamiento termo-acústico y tabiquería interior para separar las viviendas tuteladas, comedor, oficinas y salas de terapia.',
-      percent: '0%',
-      price: '850.000,00 €',
-      width: '0%'
+      price: '850.000,00 €'
     },
     '5': {
       num: 'Fase 5',
       title: 'Equipamiento Terapéutico y Puesta en Marcha',
       desc: 'Mobiliario adaptado para personas autistas, equipamiento completo de salas de integración sensorial y psicomotricidad, cocina industrial, climatización inteligente y tramitación de la licencia de apertura e inauguración.',
-      percent: '0%',
-      price: '280.000,00 €',
-      width: '0%'
+      price: '280.000,00 €'
     }
   };
 
@@ -712,8 +897,6 @@ function initApp() {
           roadmapDisplay.querySelector('.phase-number').textContent = data.num;
           phaseTitle.textContent = data.title;
           phaseDesc.textContent = data.desc;
-          phasePercent.textContent = data.percent;
-          phaseProgressFill.style.width = data.width;
           phasePrice.textContent = data.price;
           roadmapDisplay.style.opacity = '1';
         }, 150);
@@ -727,44 +910,6 @@ function initApp() {
     firstPhaseBtn.click();
   }
 
-  // --- 7. INTERACTIVE TAX CALCULATOR WIDGET ---
-  const donationInput = document.getElementById('donation-input');
-  const calcDeduction = document.getElementById('calc-deduction');
-  const calcNet = document.getElementById('calc-net');
-  const calcPercent = document.getElementById('calc-percent');
-
-  if (donationInput && calcDeduction && calcNet && calcPercent) {
-    const calculateTaxes = () => {
-      const amount = parseFloat(donationInput.value) || 0;
-      let deduction = 0;
-
-      if (amount <= 0) {
-        calcDeduction.textContent = "0.00 €";
-        calcNet.textContent = "0.00 €";
-        calcPercent.textContent = "0%";
-        return;
-      }
-
-      // Spanish Tax Law 49/2002 for Public Utility Entities (2025/2026 guidelines)
-      // 80% deduction on the first 250€
-      // 40% deduction on anything above 250€
-      if (amount <= 250) {
-        deduction = amount * 0.8;
-      } else {
-        deduction = (250 * 0.8) + ((amount - 250) * 0.4);
-      }
-
-      const netCost = amount - deduction;
-      const averagePercent = (deduction / amount) * 100;
-
-      // Update text views
-      calcDeduction.textContent = `${deduction.toFixed(2)} €`;
-      calcNet.textContent = `${netCost.toFixed(2)} €`;
-      calcPercent.textContent = `${Math.round(averagePercent)}%`;
-    };
-
-    donationInput.addEventListener('input', calculateTaxes);
-  }
 
 
   // --- 8. CLIPBOARD IBAN COPY ---
@@ -905,7 +1050,7 @@ BT
 0 -20 Td (Importe Registrado: ${amount} EUR) Tj
 0 -20 Td (Modalidad: Donacion ${type.toUpperCase()}) Tj
 0 -40 Td (Detalles de Pago para transferencia:) Tj
-0 -20 Td (Banco: CaixaBank   IBAN: ES92 2100 9033 8002 0023 9455) Tj
+0 -20 Td (Banco: CaixaBank   IBAN: ES92 2100 9033 8002 0023 9455   Bizum: 15174) Tj
 0 -40 Td (Por favor, realice la transferencia bancaria adjuntando su DNI en el concepto.) Tj
 0 -20 Td (Este documento es un justificante provisional. Recibira el certificado fiscal oficial) Tj
 0 -15 Td (en su correo electronico tras la verificacion de la transferencia.) Tj

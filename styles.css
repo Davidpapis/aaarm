@@ -47,6 +47,10 @@
   padding: 0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -2151,30 +2155,36 @@ textarea:focus-visible {
   margin-bottom: 25px;
 }
 
-.progress-bar-container {
+.phase-funding-needed-box {
+  background: rgba(0, 102, 153, 0.05);
+  border: 1px solid rgba(0, 102, 153, 0.12);
+  border-radius: var(--border-radius-md, 12px);
+  padding: 14px 18px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 15px;
+}
+
+.phase-needed-badge {
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
-}
-
-.progress-percent-label {
+  background-color: var(--brand-blue);
+  color: #ffffff;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.phase-needed-subtext {
+  font-size: 0.92rem;
   color: var(--color-text-muted);
-}
-
-.progress-bar-track {
-  height: 12px;
-  background-color: var(--color-border);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  background-color: var(--color-success);
-  border-radius: 10px;
-  transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-bottom: 0 !important;
+  line-height: 1.4;
 }
 
 .display-action-card {
@@ -2271,121 +2281,92 @@ textarea:focus-visible {
   color: var(--brand-red);
 }
 
-/* Calculator Widget */
-.calculator-card {
+/* Fiscal Certificate & Steps Card */
+.fiscal-certificate-card {
   padding: 40px;
 }
 
-.calculator-card h3 {
-  margin-bottom: 12px;
+.fiscal-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgb(var(--brand-green-rgb) / 0.1);
+  color: var(--brand-green);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  letter-spacing: 0.03em;
 }
 
-.calculator-card p {
-  font-size: 0.9rem;
+.fiscal-certificate-card h3 {
+  font-size: 1.45rem;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+}
+
+.fiscal-certificate-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.fiscal-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
-.calculator-form {
+.fiscal-step-item {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-.input-group {
+.fiscal-step-number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-blue), var(--brand-coral));
+  color: white;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.input-group label {
-  font-family: var(--font-title);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--color-primary);
-}
-
-.input-wrapper {
-  position: relative;
-}
-
-.input-wrapper input {
-  width: 100%;
-  padding: 12px 40px 12px 16px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  border-radius: var(--border-radius-sm);
-  border: 2px solid var(--color-border);
-  font-family: var(--font-title);
-  color: var(--color-primary);
-  transition: var(--transition);
-}
-
-.input-wrapper input:focus {
-  border-color: var(--color-primary);
-  outline: none;
-}
-
-.euro-symbol {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: 700;
-  color: var(--color-text-muted);
-  font-size: 1.2rem;
-}
-
-.calc-results {
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  padding: 20px;
-}
-
-.result-row {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
-}
-
-.result-row span {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-}
-
-.result-row strong {
-  font-family: var(--font-title);
-  font-size: 1.2rem;
-  color: var(--color-text);
-}
-
-.result-row.highlight-row {
-  border-top: 1px dashed var(--color-border);
-  margin-top: 8px;
-  padding-top: 15px;
-}
-
-.result-row.highlight-row span {
-  font-size: 1.05rem;
+  justify-content: center;
   font-weight: 700;
-  color: var(--color-primary);
+  font-size: 0.95rem;
+  box-shadow: 0 4px 10px rgb(var(--brand-blue-rgb) / 0.25);
 }
 
-.result-row.highlight-row strong {
-  font-size: 1.7rem;
-  color: var(--color-accent);
+.fiscal-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.result-row-percentage {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 0.9rem;
+.fiscal-step-text strong {
+  font-size: 1rem;
+  color: var(--color-text);
+  font-family: var(--font-title);
 }
 
-.result-row-percentage strong {
-  color: var(--color-success);
+.fiscal-step-text span {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.fiscal-step-text a {
+  color: var(--brand-blue);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.fiscal-card-action {
+  margin-top: 10px;
 }
 
 /* ==========================================================================
@@ -4290,5 +4271,844 @@ textarea:focus-visible {
     transform: none !important;
     opacity: 1 !important;
     transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   REVISION OCTOBER/SEPTEMBER UPDATES:
+   - 2x2 Testimonials Grid
+   - Interactive Statutes Expand Panel in Registros
+   - Colabora Beyond Monetary Donation Intro Box
+   - Larger Ayuntamiento de Marbella Footer Logo
+   - Inline Legal Links in Form Checkboxes
+   ========================================================================== */
+
+.testimonials-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-partner-logo.footer-partner-logo-large {
+  width: 196px;
+  height: 86px;
+  padding: 10px 14px;
+}
+
+.registry-card-interactive {
+  cursor: pointer;
+  border-top-color: var(--brand-red);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.registry-card-interactive.active {
+  border-top-color: var(--brand-green);
+  box-shadow: 0 14px 32px rgba(0, 102, 153, 0.16);
+}
+
+.registry-action-hint {
+  margin-top: 12px !important;
+  color: var(--brand-blue);
+  font-weight: 700;
+  font-size: 0.9rem !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statutes-expand-panel {
+  margin-top: 32px;
+  padding: 40px;
+  border-top: 4px solid var(--brand-blue);
+  animation: viewFadeIn 0.35s ease-out forwards;
+}
+
+.statutes-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.statutes-panel-header h3 {
+  text-align: left;
+  margin: 10px 0 0 0;
+  font-size: 1.5rem;
+}
+
+.statutes-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.statutes-panel-body {
+  max-height: 620px;
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.statutes-panel-body h4 {
+  color: var(--color-primary);
+  margin: 28px 0 12px 0;
+  font-size: 1.12rem;
+}
+
+.statutes-panel-body p {
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.statutes-panel-body ul {
+  margin: 0 0 16px 22px;
+}
+
+.statutes-panel-body li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.statutes-diligencia {
+  background: rgba(0, 102, 153, 0.06);
+  border-left: 4px solid var(--brand-blue);
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.statutes-diligencia h4 {
+  margin-top: 0;
+}
+
+.colabora-beyond-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 38px 40px;
+  margin-bottom: 48px;
+  border-left: 5px solid var(--brand-blue);
+}
+
+.colabora-beyond-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(0, 102, 153, 0.1);
+  color: var(--brand-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.colabora-beyond-content h3 {
+  font-size: 1.55rem;
+  color: var(--color-primary);
+  margin-bottom: 14px;
+}
+
+.colabora-beyond-content p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.colabora-beyond-content .colabora-beyond-highlight {
+  margin-bottom: 0;
+  color: var(--brand-blue);
+}
+
+.legal-inline-link {
+  color: var(--brand-blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-inline-link:hover {
+  color: var(--brand-red);
+}
+
+@media (max-width: 768px) {
+  .colabora-beyond-box {
+    flex-direction: column;
+    padding: 26px 22px;
+    gap: 18px;
+  }
+
+  .statutes-expand-panel {
+    padding: 24px 18px;
+  }
+}
+
+/* ==========================================================================
+   3D DIGITAL BOOKSTORE & INTERACTIVE PDF READER MODAL (IN NOTICIAS)
+   ========================================================================== */
+
+.blog-filter-library-jump {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--brand-blue);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--brand-blue) 100%);
+  color: #ffffff;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 102, 153, 0.24);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.blog-filter-library-jump:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 102, 153, 0.34);
+}
+
+.library-3d-section {
+  margin-top: 76px;
+  margin-bottom: 64px;
+  padding: 52px 44px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(0, 134, 214, 0.08), transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(122, 184, 0, 0.08), transparent 45%),
+    linear-gradient(180deg, #f8fbff 0%, #f1f5f9 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+}
+
+.library-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.library-header-text {
+  max-width: 680px;
+}
+
+.library-header-text h3 {
+  font-size: clamp(1.85rem, 2.8vw, 2.4rem);
+  color: var(--color-primary);
+  margin: 10px 0 12px 0;
+}
+
+.library-header-text p {
+  font-size: 1.02rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.library-category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+.lib-pill {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: var(--font-title);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.lib-pill:hover {
+  color: var(--color-primary);
+  background: rgba(0, 134, 214, 0.08);
+}
+
+.lib-pill.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.bookshelf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 42px 32px;
+}
+
+.book-showcase-card {
+  position: relative;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  padding: 34px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease, opacity 0.28s ease;
+  cursor: pointer;
+}
+
+.book-showcase-card[hidden],
+.book-showcase-card.is-filtered-out {
+  display: none !important;
+}
+
+/* Architectural wooden/oak shelf ledge at the base of the 3D book stage */
+.book-3d-scene {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  padding-bottom: 18px;
+}
+
+.book-3d-scene::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 6%;
+  right: 6%;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 65%, #94a3b8 100%);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.14);
+  z-index: 1;
+}
+
+.book-3d {
+  position: relative;
+  width: 196px;
+  height: 274px;
+  transform-style: preserve-3d;
+  transform: rotateY(-14deg) rotateX(3deg);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 3;
+}
+
+.book-showcase-card:hover .book-3d,
+.book-showcase-card:focus-within .book-3d,
+.book-showcase-card.is-open .book-3d {
+  transform: rotateY(-26deg) rotateX(6deg) translateY(-12px) scale(1.04);
+}
+
+/* Front Cover of the 3D Book */
+.book-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px 8px 8px 3px;
+  background: #ffffff;
+  overflow: hidden;
+  transform: translateZ(15px);
+  box-shadow:
+    inset 4px 0 10px rgba(0, 0, 0, 0.12),
+    -4px 10px 24px rgba(15, 23, 42, 0.24);
+}
+
+/* Realistic book binding crease along left margin */
+.book-cover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 16px;
+  background: linear-gradient(90deg,
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(255, 255, 255, 0.38) 35%,
+    rgba(0, 0, 0, 0.12) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* 3D Left Spine */
+.book-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -15px;
+  width: 30px;
+  transform: rotateY(-90deg);
+  transform-origin: center;
+  border-radius: 3px 0 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.28);
+}
+
+.book-spine span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-title);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 88%;
+}
+
+.book-3d.spine-blue .book-spine {
+  background: linear-gradient(180deg, #005b8f 0%, #0086d6 100%);
+}
+.book-3d.spine-green .book-spine {
+  background: linear-gradient(180deg, #4d7c0f 0%, #65a30d 100%);
+}
+.book-3d.spine-amber .book-spine {
+  background: linear-gradient(180deg, #b45309 0%, #d97706 100%);
+}
+.book-3d.spine-coral .book-spine {
+  background: linear-gradient(180deg, #9f1239 0%, #e11d48 100%);
+}
+
+/* 3D Right Pages Block */
+.book-pages {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  right: -13px;
+  width: 26px;
+  transform: rotateY(90deg);
+  transform-origin: center;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #f8fafc 0px,
+      #f8fafc 2px,
+      #cbd5e1 2px,
+      #cbd5e1 3px
+    );
+  border-radius: 0 2px 2px 0;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Back cover depth */
+.book-3d::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #1e293b;
+  border-radius: 3px 8px 8px 3px;
+  transform: translateZ(-15px);
+  box-shadow: -10px 16px 26px rgba(15, 23, 42, 0.28);
+}
+
+.book-pedestal-shadow {
+  position: absolute;
+  bottom: 10px;
+  width: 170px;
+  height: 16px;
+  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.35) 0%, transparent 72%);
+  filter: blur(4px);
+  z-index: 2;
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+
+.book-showcase-card:hover .book-pedestal-shadow {
+  transform: scale(1.12);
+  opacity: 0.85;
+}
+
+.book-tag-floating {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-title);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+}
+
+.book-tag-floating.tag-blue { background: var(--brand-blue); }
+.book-tag-floating.tag-green { background: #5a9400; }
+.book-tag-floating.tag-amber { background: #d97706; }
+.book-tag-floating.tag-coral { background: var(--brand-red); }
+
+.book-caption-bar {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 8px;
+}
+
+.book-caption-bar h4 {
+  font-size: 1.04rem;
+  color: var(--color-primary);
+  margin: 0 0 6px 0;
+  line-height: 1.35;
+}
+
+.book-meta-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.book-meta-mini i {
+  color: var(--brand-red);
+}
+
+/* Interactive Hover Overlay Drawer */
+.book-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(165deg, rgba(10, 22, 44, 0.95) 0%, rgba(15, 35, 66, 0.97) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px);
+  transition:
+    opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.32s;
+  z-index: 10;
+}
+
+.book-showcase-card:hover .book-hover-overlay,
+.book-showcase-card:focus-within .book-hover-overlay,
+.book-showcase-card.is-open .book-hover-overlay {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.book-overlay-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.book-overlay-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-family: var(--font-title);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.book-overlay-badge.badge-blue { background: var(--brand-blue); }
+.book-overlay-badge.badge-green { background: #5a9400; }
+.book-overlay-badge.badge-amber { background: #d97706; }
+.book-overlay-badge.badge-coral { background: var(--brand-red); }
+
+.book-overlay-size {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.book-hover-overlay h4 {
+  color: #ffffff;
+  font-size: 1.2rem;
+  line-height: 1.32;
+  margin: 0 0 12px 0;
+}
+
+.book-hover-overlay p {
+  color: rgba(226, 232, 240, 0.9);
+  font-size: 0.92rem;
+  line-height: 1.58;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.book-overlay-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-book-read,
+.btn-book-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-family: var(--font-title);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.btn-book-read {
+  background: #ffffff;
+  color: #0f172a;
+  border: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+.btn-book-read:hover {
+  background: var(--brand-yellow);
+  color: #0f172a;
+  transform: translateY(-2px);
+}
+
+.btn-book-download {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.38);
+}
+
+.btn-book-download:hover {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Fullscreen PDF Reader Modal */
+.pdf-reader-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.pdf-reader-modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.pdf-reader-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 15, 30, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.pdf-reader-dialog {
+  position: relative;
+  width: min(1160px, 100%);
+  height: min(88vh, 920px);
+  background: #0f172a;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.pdf-reader-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #1e293b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.pdf-reader-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.pdf-reader-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--brand-blue);
+  color: #ffffff;
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.pdf-reader-title-group h4 {
+  color: #ffffff;
+  font-size: 1.05rem;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pdf-reader-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-pdf-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-family: var(--font-title);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-pdf-action:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.btn-pdf-action.btn-pdf-primary {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  color: #ffffff;
+}
+
+.btn-pdf-action.btn-pdf-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-pdf-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-pdf-close:hover {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+}
+
+.pdf-reader-frame-wrap {
+  flex: 1;
+  width: 100%;
+  background: #334155;
+}
+
+.pdf-reader-frame-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .bookshelf-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .library-3d-section {
+    padding: 32px 18px;
+  }
+
+  .bookshelf-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .blog-filter-library-jump {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .pdf-reader-modal {
+    padding: 10px;
+  }
+
+  .pdf-reader-dialog {
+    height: 92vh;
+  }
+
+  .pdf-reader-title-group h4 {
+    max-width: 200px;
   }
 }
