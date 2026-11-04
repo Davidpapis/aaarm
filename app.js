@@ -657,7 +657,12 @@ function initApp() {
 
   // --- 6a. HOME LATEST NEWS CONTINUOUS HORIZONTAL MARQUEE (SYNCED WITH #actualidad) ---
   const homeNewsTrack = document.getElementById('home-news-marquee-track');
-  if (homeNewsTrack && blogCards.length > 0) {
+  const homeNewsScroller = homeNewsTrack ? homeNewsTrack.closest('.home-news-marquee') : null;
+  if (homeNewsTrack && homeNewsScroller && blogCards.length > 0) {
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let draggedHorizontally = false;
+
     const createHomeNewsSet = (isDuplicate = false) => {
       const set = document.createElement('div');
       set.className = 'home-news-marquee-set';
@@ -677,6 +682,10 @@ function initApp() {
         const articleId = readBtn ? readBtn.getAttribute('data-article') : null;
 
         const openFromHome = (e) => {
+          if (draggedHorizontally) {
+            e.preventDefault();
+            return;
+          }
           e.preventDefault();
           window.location.hash = '#actualidad';
           setTimeout(() => {
@@ -701,7 +710,114 @@ function initApp() {
       return set;
     };
 
-    homeNewsTrack.replaceChildren(createHomeNewsSet(false), createHomeNewsSet(true));
+    // Render 3 identical sets so the user can swipe infinitely both left and right
+    const setA = createHomeNewsSet(true);
+    const setB = createHomeNewsSet(false);
+    const setC = createHomeNewsSet(true);
+    homeNewsTrack.replaceChildren(setA, setB, setC);
+
+    let setWidth = 0;
+    let preciseScroll = 0;
+    let isDesktopHovered = false;
+    let isTouchSwipingX = false;
+    let touchResumeTimer = null;
+    const isDesktopPointer = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    const measureAndCenter = () => {
+      const w = setB.offsetWidth;
+      if (w > 0 && Math.abs(w - setWidth) > 2) {
+        setWidth = w;
+        if (homeNewsScroller.scrollLeft < setWidth * 0.5 || homeNewsScroller.scrollLeft > setWidth * 2.5) {
+          homeNewsScroller.scrollLeft = setWidth;
+          preciseScroll = setWidth;
+        }
+      }
+    };
+
+    const normalizeInfiniteScroll = () => {
+      if (!setWidth) setWidth = setB.offsetWidth;
+      if (!setWidth) return;
+      if (homeNewsScroller.scrollLeft >= setWidth * 2) {
+        homeNewsScroller.scrollLeft -= setWidth;
+        preciseScroll = homeNewsScroller.scrollLeft;
+      } else if (homeNewsScroller.scrollLeft <= 2) {
+        homeNewsScroller.scrollLeft += setWidth;
+        preciseScroll = homeNewsScroller.scrollLeft;
+      }
+    };
+
+    // Desktop only: pause on mouse hover so user can click comfortably
+    homeNewsScroller.addEventListener('mouseenter', () => {
+      if (isDesktopPointer()) isDesktopHovered = true;
+    });
+    homeNewsScroller.addEventListener('mouseleave', () => {
+      isDesktopHovered = false;
+      preciseScroll = homeNewsScroller.scrollLeft;
+    });
+
+    // Touch handling: vertical scroll does NOT stop the marquee; horizontal finger drag moves smoothly both ways
+    homeNewsScroller.addEventListener('touchstart', (e) => {
+      if (!e.touches[0]) return;
+      pointerStartX = e.touches[0].clientX;
+      pointerStartY = e.touches[0].clientY;
+      draggedHorizontally = false;
+      if (touchResumeTimer) {
+        clearTimeout(touchResumeTimer);
+        touchResumeTimer = null;
+      }
+    }, { passive: true });
+
+    homeNewsScroller.addEventListener('touchmove', (e) => {
+      if (!e.touches[0]) return;
+      const dx = Math.abs(e.touches[0].clientX - pointerStartX);
+      const dy = Math.abs(e.touches[0].clientY - pointerStartY);
+      if (dx > 8 && dx > dy) {
+        draggedHorizontally = true;
+        isTouchSwipingX = true;
+        preciseScroll = homeNewsScroller.scrollLeft;
+      }
+    }, { passive: true });
+
+    const endTouchSwipe = () => {
+      if (isTouchSwipingX) {
+        if (touchResumeTimer) clearTimeout(touchResumeTimer);
+        // Wait briefly for native momentum scroll to settle, then continue seamless auto-scroll
+        touchResumeTimer = setTimeout(() => {
+          preciseScroll = homeNewsScroller.scrollLeft;
+          isTouchSwipingX = false;
+        }, 550);
+      }
+      setTimeout(() => {
+        draggedHorizontally = false;
+      }, 80);
+    };
+
+    homeNewsScroller.addEventListener('touchend', endTouchSwipe, { passive: true });
+    homeNewsScroller.addEventListener('touchcancel', endTouchSwipe, { passive: true });
+
+    homeNewsScroller.addEventListener('scroll', () => {
+      normalizeInfiniteScroll();
+      if (isTouchSwipingX || isDesktopHovered) {
+        preciseScroll = homeNewsScroller.scrollLeft;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', measureAndCenter, { passive: true });
+    requestAnimationFrame(() => {
+      measureAndCenter();
+      const step = () => {
+        if (!setWidth) measureAndCenter();
+        if (setWidth > 0 && !isDesktopHovered && !isTouchSwipingX) {
+          preciseScroll += 0.65;
+          if (preciseScroll >= setWidth * 2) {
+            preciseScroll -= setWidth;
+          }
+          homeNewsScroller.scrollLeft = preciseScroll;
+        }
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
   }
 
   // --- 6b. 3D DIGITAL BOOKSTORE & PDF READER MODAL ---
