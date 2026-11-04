@@ -54,6 +54,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -62,7 +64,8 @@ body {
   font-family: var(--font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: clip;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Typography Hierarchy */
@@ -686,6 +689,9 @@ textarea:focus-visible {
 .content-area {
   min-height: calc(100vh - 170px);
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Reverted back to SPA display: none, block only on active */
@@ -693,6 +699,9 @@ textarea:focus-visible {
   display: none;
   opacity: 0;
   transition: opacity 0.35s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .page-view.active {
@@ -1381,7 +1390,7 @@ textarea:focus-visible {
 
 .cta-strip-text {
   flex: 1;
-  min-width: 300px;
+  min-width: min(300px, 100%);
 }
 
 .cta-strip-text h3 {
@@ -3693,6 +3702,9 @@ textarea:focus-visible {
   color: #ffffff;
   padding: 50px 0 0;
   border-top: 4px solid var(--brand-green);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .footer-grid {
@@ -3774,8 +3786,10 @@ textarea:focus-visible {
 .footer-partner-logos {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
+  max-width: 100%;
 }
 
 .footer-partner-logo {
@@ -4307,9 +4321,9 @@ textarea:focus-visible {
 }
 
 .footer-partner-logo.footer-partner-logo-large {
-  width: 196px;
-  height: 86px;
-  padding: 10px 14px;
+  width: min(180px, calc(50% - 6px));
+  height: 82px;
+  padding: 10px 12px;
 }
 
 .registry-card-interactive {
@@ -5132,6 +5146,8 @@ textarea:focus-visible {
 .home-news-marquee-section {
   padding: 80px 0 40px;
   position: relative;
+  width: 100%;
+  max-width: 100vw;
   overflow: hidden;
 }
 
@@ -5159,9 +5175,10 @@ textarea:focus-visible {
 
 .home-news-marquee-stage {
   position: relative;
+  display: block;
   width: 100%;
-  display: flex;
-  align-items: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .home-news-nav-btn {
@@ -5208,9 +5225,13 @@ textarea:focus-visible {
 
 .home-news-marquee {
   position: relative;
+  display: block;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
