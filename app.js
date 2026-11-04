@@ -355,9 +355,9 @@ function initApp() {
       `,
       media: {
         type: 'image',
-        src: new URL('./assets/images/blog/loteria-navidad-2026.jpg', import.meta.url).href,
+        src: new URL('./assets/images/blog/decimo-loteria-2026.jpg', import.meta.url).href,
         alt: 'Décimo de Lotería de Navidad 2026 Nº 69.291 de la Asociación de Autismo Ángel Rivière',
-        caption: 'Lotería de Navidad 2026 · Número 69.291 · Asociación de Autismo Ángel Rivière'
+        caption: 'Décimo oficial Lotería de Navidad 2026 · Número 69.291 · Asociación de Autismo Ángel Rivière'
       }
     },
     'asamblea-ordinaria': {
@@ -654,6 +654,55 @@ function initApp() {
   });
 
   if (blogBackButton) blogBackButton.addEventListener('click', showBlogIndex);
+
+  // --- 6a. HOME LATEST NEWS CONTINUOUS HORIZONTAL MARQUEE (SYNCED WITH #actualidad) ---
+  const homeNewsTrack = document.getElementById('home-news-marquee-track');
+  if (homeNewsTrack && blogCards.length > 0) {
+    const createHomeNewsSet = (isDuplicate = false) => {
+      const set = document.createElement('div');
+      set.className = 'home-news-marquee-set';
+      if (isDuplicate) set.setAttribute('aria-hidden', 'true');
+
+      blogCards.forEach(sourceCard => {
+        const clone = sourceCard.cloneNode(true);
+        clone.classList.remove('reveal', 'active-reveal', 'blog-featured');
+        clone.classList.add('home-news-marquee-card');
+        clone.removeAttribute('hidden');
+        if (isDuplicate) {
+          clone.setAttribute('tabindex', '-1');
+          clone.querySelectorAll('button, a').forEach(el => el.setAttribute('tabindex', '-1'));
+        }
+
+        const readBtn = clone.querySelector('.blog-read-button');
+        const articleId = readBtn ? readBtn.getAttribute('data-article') : null;
+
+        const openFromHome = (e) => {
+          e.preventDefault();
+          window.location.hash = '#actualidad';
+          setTimeout(() => {
+            if (articleId) {
+              showBlogPost(articleId);
+            }
+          }, 60);
+        };
+
+        if (readBtn) {
+          readBtn.addEventListener('click', openFromHome);
+        }
+        clone.addEventListener('click', (e) => {
+          if (!e.target.closest('.blog-read-button')) {
+            openFromHome(e);
+          }
+        });
+
+        set.appendChild(clone);
+      });
+
+      return set;
+    };
+
+    homeNewsTrack.replaceChildren(createHomeNewsSet(false), createHomeNewsSet(true));
+  }
 
   // --- 6b. 3D DIGITAL BOOKSTORE & PDF READER MODAL ---
   const btnJumpLibreria = document.getElementById('btn-jump-libreria');
