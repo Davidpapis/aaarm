@@ -720,8 +720,13 @@ function initApp() {
     let preciseScroll = 0;
     let isDesktopHovered = false;
     let isTouchSwipingX = false;
+    let isArrowGliding = false;
     let touchResumeTimer = null;
+    let arrowGlideTimer = null;
     const isDesktopPointer = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const homeNewsStage = homeNewsScroller.closest('.home-news-marquee-stage') || homeNewsScroller;
+    const btnHomeNewsPrev = document.getElementById('home-news-prev');
+    const btnHomeNewsNext = document.getElementById('home-news-next');
 
     const measureAndCenter = () => {
       const w = setB.offsetWidth;
@@ -746,11 +751,40 @@ function initApp() {
       }
     };
 
+    const stepByCard = (direction) => {
+      if (!setWidth) measureAndCenter();
+      normalizeInfiniteScroll();
+      const firstCard = setB.querySelector('.home-news-marquee-card');
+      const cardStep = firstCard ? firstCard.offsetWidth + 26 : 381;
+      isArrowGliding = true;
+      if (arrowGlideTimer) clearTimeout(arrowGlideTimer);
+      homeNewsScroller.scrollBy({ left: direction * cardStep, behavior: 'smooth' });
+      arrowGlideTimer = setTimeout(() => {
+        normalizeInfiniteScroll();
+        preciseScroll = homeNewsScroller.scrollLeft;
+        isArrowGliding = false;
+      }, 460);
+    };
+
+    if (btnHomeNewsPrev) {
+      btnHomeNewsPrev.addEventListener('click', (e) => {
+        e.preventDefault();
+        stepByCard(-1);
+      });
+    }
+
+    if (btnHomeNewsNext) {
+      btnHomeNewsNext.addEventListener('click', (e) => {
+        e.preventDefault();
+        stepByCard(1);
+      });
+    }
+
     // Desktop only: pause on mouse hover so user can click comfortably
-    homeNewsScroller.addEventListener('mouseenter', () => {
+    homeNewsStage.addEventListener('mouseenter', () => {
       if (isDesktopPointer()) isDesktopHovered = true;
     });
-    homeNewsScroller.addEventListener('mouseleave', () => {
+    homeNewsStage.addEventListener('mouseleave', () => {
       isDesktopHovered = false;
       preciseScroll = homeNewsScroller.scrollLeft;
     });
@@ -796,8 +830,10 @@ function initApp() {
     homeNewsScroller.addEventListener('touchcancel', endTouchSwipe, { passive: true });
 
     homeNewsScroller.addEventListener('scroll', () => {
-      normalizeInfiniteScroll();
-      if (isTouchSwipingX || isDesktopHovered) {
+      if (!isArrowGliding) {
+        normalizeInfiniteScroll();
+      }
+      if (isTouchSwipingX || isDesktopHovered || isArrowGliding) {
         preciseScroll = homeNewsScroller.scrollLeft;
       }
     }, { passive: true });
@@ -807,7 +843,7 @@ function initApp() {
       measureAndCenter();
       const step = () => {
         if (!setWidth) measureAndCenter();
-        if (setWidth > 0 && !isDesktopHovered && !isTouchSwipingX) {
+        if (setWidth > 0 && !isDesktopHovered && !isTouchSwipingX && !isArrowGliding) {
           preciseScroll += 0.65;
           if (preciseScroll >= setWidth * 2) {
             preciseScroll -= setWidth;
